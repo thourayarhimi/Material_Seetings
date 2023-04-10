@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<meta charset="utf-8">  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">  
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+</head>  
+<style> 
+
+.card {  
+  margin-top: 100px;  
+}  
+.btn-upload {  
+    padding: 10px 20px;  
+    margin-left: 10px;  
+}  
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {  
+    color: #fff;  
+    background-color: #0062cc;  
+    border-color: #1c7430;  
+}  
+  
+ 
+.upload-input-group {  
+    margin-bottom: 10px;  
+}  
+.input-group>.custom-select:not(:last-child) {  
+  height: 45px;  
+}  
+.input-group>.form-control:not(:last-child) {  
+  height: 45px;  
+}  
+</style>  
+<body>  
+ 
+   
+ 
+        
+                    
+                    <form action="" method="POST" enctype="multipart/form-data" class="form-horizontal"> 
+                        {% csrf_token %} 
+                        <div class="row form-group">  
+                            <div class="col-12 col-md-12">  
+                                <div class="control-group" id="fields">
+                                    
+                                        {% if messages %}
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>!!</strong> {{ messages }}
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                          </div>
+                                        
+                                                
+                                                 
+                                            
+                                        
+                                    {% endif %}
+                                    <label class="control-label" for="field1">  
+                                        Upload File  
+                                    </label>  
+                                    <div class="controls">  
+                                        <div class="entry input-group upload-input-group">  
+                                            <input class="form-control" name="file" type="file">  
+                                            <button class="btn btn-upload btn-success btn-add" type="button">  
+                                                <i class="fa fa-plus"> </i>  
+                                            </button>  
+                                        </div>  
+                                    </div>  
+                                    <button class="btn btn-primary"> Upload </button>  
+                                </div>  
+                            </div>  
+                        </div>  
+                    </form>  
+                  
+            
+       
+   
+
+<script>  
+        $(function () {  
+            $(document).on('click', '.btn-add', function (e) {  
+                e.preventDefault();  
+                var controlForm = $('.controls:first'),  
+                    currentEntry = $(this).parents('.entry:first'),  
+                    newEntry = $(currentEntry.clone()).appendTo(controlForm);  
+                newEntry.find('input').val('');  
+                controlForm.find('.entry:not(:last) .btn-add')  
+                    .removeClass('btn-add').addClass('btn-remove')  
+                    .removeClass('btn-success').addClass('btn-danger')  
+                    .html('<span class="fa fa-trash"> </span>');  
+            }).on('click', '.btn-remove', function (e) {  
+                $(this).parents('.entry:first').remove();  
+                e.preventDefault();  
+                return false;  
+            });  
+        });  
+</script>  
+</body>  
+</html>
+{% endblock %}
