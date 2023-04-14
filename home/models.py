@@ -1,46 +1,122 @@
 from django.db import models
 
 # Create your models here.
+#BasedModel
 
-class Rule(models.Model):
+class BaseModel(models.Model) :
+
+    created_at = models.DateTimeField(auto_now_add=True)  
+
+    updated_at = models.DateTimeField(auto_now=True, null=True)
+
+    created_by= models.CharField(max_length= 30, default='thouraya')
+
+    updated_by = models.CharField(max_length= 30,default='thouraya')
+
+   
+
+    class Meta :
+
+         #Django will not create a database table for this model
+
+         abstract = True
+
+ 
+
+#creating a custom model manager to apply the filter
+
+#automatically without using filter(is_delete=False)
+
+ 
+
+#SoftDeleteManager
+
+class SoftDeleteManager(models.Manager):
+
+    def get_queryset(self):
+
+        return super().get_queryset().filter(is_deleted=False)
+#SoftDeleteModel
+
+class SoftDeleteModel(models.Model):
+
+    is_deleted = models.BooleanField(null= False, default=False)
+
+    deleted_by= models.CharField(max_length= 30,null=True)
+
+    deleted_at = models.DateTimeField(auto_now_add=True,null=True)
+
+    restored_at = models.DateTimeField(auto_now=True, null=True)
+
+    restored_by = models.CharField(max_length= 30,default='Marwa',null=True)
+
+   
+
+    objects = models.Manager()
+
+    undeleted_objects = SoftDeleteManager()
+
+ 
+
+    def soft_delete(self):
+
+        self.is_deleted = True
+
+        self.save()
+
+ 
+
+    def restore(self):
+
+        self.is_deleted = False
+
+        self.save()
+
+   
+
+ 
+
+    class Meta :
+
+        #Django will not create a database table for this model
+
+        abstract= True  
+class Rule(BaseModel,SoftDeleteModel , models.Model):
     rule_name = models.CharField(max_length=200)
     comment = models.TextField(max_length=200)
-    created_by = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+ 
     
     
-class Condition(models.Model):
+class Condition(BaseModel,SoftDeleteModel, models.Model):
     condition_number = models.IntegerField()
     field = models.FileField()
     value = models.TextField(max_length=200)
-    created_by = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
+  
 
-class Result(models.Model):
+class Result(BaseModel,SoftDeleteModel, models.Model):
     field = models.FileField()
     value = models.TextField(max_length=200)
     condition_number = models.IntegerField()
-    created_by = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
+ 
     
-class Profil(models.Model):
+class Profil(BaseModel,SoftDeleteModel, models.Model):
     name = models.CharField(max_length=200)
     comment = models.TextField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+  
     
     
     
-class Filed(models.Model):
+class Filed(BaseModel,SoftDeleteModel, models.Model):
     name = models.CharField(max_length=200)
     table = models.DateField()
     program =  models.CharField(max_length=200)
     tab =  models.CharField(max_length=200)
+    tab_fr =  models.CharField(max_length=200)
+     
     
     
     
-class mara_marc_for_MS(models.Model):
+class mara_marc_for_MS(BaseModel,SoftDeleteModel,models.Model):
     article = models.TextField(max_length=200)
     designation_article =models.TextField(max_length=200,blank=True,null=True)
     texte_article= models.TextField(max_length=200,blank=True,null=True)
