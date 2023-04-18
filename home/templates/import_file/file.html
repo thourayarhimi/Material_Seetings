@@ -84,17 +84,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        {% for file in  excel_files %}
-        <th scope="row">1</th>
-        <td>{{ file.id }}</td>
-        <td>{{ file.file.name }}</td>
-        <td>{{ file.imported_at }}</td>
-        <td>{{ file.created_by}}</td>
-        <td>Act</td>
-      </tr>
+      {% for fichier in fichiers_importes %}
+          <tr>
+              <td>{{ fichier }}</td>
+              <td>{{ fichier.id}}</td>
+              <td>{{ fichier.created_at }}</td>
+              <td>{{ fichier.updated_by }}</td>
+          </tr>
       {% endfor %}
-    </tbody>
+  </tbody>
   </table>
 
 

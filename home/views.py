@@ -1,10 +1,17 @@
 from io import StringIO
+import os
+
+
+
+
+
+import pandas as pd
 
 from django.shortcuts import render, redirect
 from django.contrib import messages
 import pandas as pd
 import psycopg2
-from django.views.decorators.csrf import csrf_exempt
+
 
 from datetime import datetime
 from .models import mara_marc_for_MS
@@ -18,9 +25,6 @@ from django.contrib import messages
 
 def home(request):
     return render(request,'home\index.html')
-
-
-
 
 
 def import_fil(request):
@@ -39,12 +43,19 @@ def import_fil(request):
          
          import_Excel(file,conn)
          messages.success(request,' importées avec succès.')
+         fichiers_importes = mara_marc_for_MS.objects.all()
+         print(fichiers_importes)
+         
         
-         return render(request,'import_file/file.html',{'messages' :'import file is successful'})
+         return render(request,'import_file/file.html',{'fichiers_importes': fichiers_importes})
    else:
       return render(request,'import_file/file.html',{'messages' :'Please upload a file!!'})
- 
-      
+
+
+
+
+
+         
 def import_Excel(file,conn):
 
     #read file with pandas
@@ -190,13 +201,11 @@ def import_Excel(file,conn):
 
     conn.commit()  
    
-   
 
 
-def excel_file_list(request):
-    excel_files = mara_marc_for_MS.objects.all()
-    print(excel_files)
-    return render(request, 'import_file/file.html', {'excel_files': excel_files})
+
+
+
 
 
   
