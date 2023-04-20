@@ -25,7 +25,13 @@ from django.contrib import messages
 
 def home(request):
     return render(request,'home\index.html')
-
+def products(request):
+  category = request.GET.get('category', 'All')
+  if category == 'All':
+    products = Product.objects.all()
+  else:
+    products = Product.objects.filter(category=category)
+  return render(request, 'products.html', {'products': products})
 
 def import_fil(request):
    if request.method == 'POST' and  request.FILES:
@@ -40,16 +46,20 @@ def import_fil(request):
                password="123456789",
                port="5432",
             )
-         
          import_Excel(file,conn)
          messages.success(request,' importées avec succès.')
-         fichiers_importes = mara_marc_for_MS.objects.all()
-         print(fichiers_importes)
+         # create queryset containing only last record
+         last_imported_file = mara_marc_for_MS.objects.latest('created_at')
+         fichiers_importes = [last_imported_file]
+         mes_donnees = mara_marc_for_MS.objects.all()
+         total_fichiers = len(mes_donnees)
          
         
-         return render(request,'import_file/file.html',{'fichiers_importes': fichiers_importes})
+         
+        
+         return render(request,'import_file/file.html',{'fichiers_importes': fichiers_importes, 'total_fichiers': total_fichiers})
    else:
-      return render(request,'import_file/file.html',{'messages' :'Please upload a file!!'})
+      return render(request,'import_file/file.html',{'messages' :"Please upload a file!!"})
 
 
 

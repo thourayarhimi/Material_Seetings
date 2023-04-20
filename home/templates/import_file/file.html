@@ -50,13 +50,15 @@
     <div class="row form-group">  
         <div class="col-12 col-md-12">  
             <div class="control-group" id="fields">
-                
-                    {% if messages %}
-                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>!!</strong> {{ messages }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endif %}
+                {% if messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endif %}
+                   
                  
                 <div class="controls">  
                     <div class="entry input-group upload-input-group">  
@@ -72,7 +74,10 @@
     </div> 
 
 </form>  
-<table class="table">
+
+<p>Il y a {{ total_fichiers }} fichiers au total.</p>
+<ul>
+<table class="table table-striped">
     <thead>
         
       <tr>
@@ -86,10 +91,14 @@
     <tbody>
       {% for fichier in fichiers_importes %}
           <tr>
-              <td>{{ fichier }}</td>
-              <td>{{ fichier.id}}</td>
+              <td>{{ fichier.id }}</td>
+              <td>{{ fichier}}</td>
               <td>{{ fichier.created_at }}</td>
               <td>{{ fichier.updated_by }}</td>
+              <td><button type="button" class="btn btn-danger">Delete</button>
+                <button type="button" class="btn btn-info">Details</button>
+                <button type="button" class="btn btn-primary">Apply filter</button>
+            </td>
           </tr>
       {% endfor %}
   </tbody>

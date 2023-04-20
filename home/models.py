@@ -9,9 +9,9 @@ class BaseModel(models.Model) :
 
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
-    created_by= models.CharField(max_length= 30, default='thouraya')
+    created_by= models.CharField(max_length= 30, default='Rhimi  Thouraya')
 
-    updated_by = models.CharField(max_length= 30,default='thouraya')
+    updated_by = models.CharField(max_length= 30,default=' Rhimi Thouraya')
 
    
 
@@ -48,7 +48,7 @@ class SoftDeleteModel(models.Model):
 
     restored_at = models.DateTimeField(auto_now=True, null=True)
 
-    restored_by = models.CharField(max_length= 30,default='Marwa',null=True)
+    restored_by = models.CharField(max_length= 30,default='Thouraya',null=True)
 
    
 
