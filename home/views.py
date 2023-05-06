@@ -1,6 +1,7 @@
 from io import StringIO
 import os
 
+from django.shortcuts import get_object_or_404, redirect
 
 
 
@@ -19,19 +20,9 @@ from .models import mara_marc_for_MS
 from django.urls import reverse
 from django.contrib import messages
 
-
-
-
-
 def home(request):
     return render(request,'home\index.html')
-def products(request):
-  category = request.GET.get('category', 'All')
-  if category == 'All':
-    products = Product.objects.all()
-  else:
-    products = Product.objects.filter(category=category)
-  return render(request, 'products.html', {'products': products})
+
 
 def import_fil(request):
    if request.method == 'POST' and  request.FILES:
@@ -213,6 +204,16 @@ def import_Excel(file,conn):
    
 
 
+
+
+
+
+def delete_file(request, pk):
+    file = get_object_or_404(mara_marc_for_MS, pk=pk)
+    if request.method == 'POST':
+        file.delete()
+        return redirect('import_fil')
+    return render(request,'import_file/file.html')
 
 
 

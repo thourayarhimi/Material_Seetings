@@ -48,7 +48,7 @@ class SoftDeleteModel(models.Model):
 
     restored_at = models.DateTimeField(auto_now=True, null=True)
 
-    restored_by = models.CharField(max_length= 30,default='Thouraya',null=True)
+    restored_by = models.CharField(max_length= 30,default='Thouraya ',null=True)
 
    
 
