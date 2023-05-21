@@ -248,7 +248,7 @@ from django.shortcuts import render
 
 def file_detail(request):
     # Chemin vers le fichier Excel
-    fichier_excel = ''
+    fichier_excel = 'C:/Users/HP/Documents/PFE/msenv/ms/mara_marc_for_MS.xlsx'
 
     try:
         # Charger le fichier Excel
