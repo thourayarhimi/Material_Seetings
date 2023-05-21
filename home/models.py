@@ -187,6 +187,7 @@ class mara_marc_for_MS(BaseModel,SoftDeleteModel,models.Model):
     pas_de_CCR = models.TextField(blank=True,null=True)
     taille_de_lot_du_CCR = models.IntegerField(blank=True,null=True)
     uQ_7= models.TextField(max_length=200,blank=True,null=True)
+
     
     
     

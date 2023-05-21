@@ -1,30 +1,36 @@
 from io import StringIO
-import os
+
 
 from django.shortcuts import get_object_or_404, redirect
+import openpyxl
+
+from django.conf import settings
 
 
-
-
+from flask import Flask
 import pandas as pd
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect 
 from django.contrib import messages
 import pandas as pd
 import psycopg2
 
-
+from .models import Filed
 from datetime import datetime
 from .models import mara_marc_for_MS
 
 from django.urls import reverse
 from django.contrib import messages
 
+# Données importées
+dc = None
+ 
 def home(request):
     return render(request,'home\index.html')
 
 
 def import_fil(request):
+   global dc
    if request.method == 'POST' and  request.FILES:
       
       
@@ -42,13 +48,15 @@ def import_fil(request):
          # create queryset containing only last record
          last_imported_file = mara_marc_for_MS.objects.latest('created_at')
          fichiers_importes = [last_imported_file]
-         mes_donnees = mara_marc_for_MS.objects.all()
-         total_fichiers = len(mes_donnees)
-         
+
+         #convert an object to a string
+         string = str(file)
+         mot_a_supprimer = ".xlsx"
+         name = string.replace(mot_a_supprimer, "")
         
          
         
-         return render(request,'import_file/file.html',{'fichiers_importes': fichiers_importes, 'total_fichiers': total_fichiers})
+         return render(request,'import_file/file.html',{'fichiers_importes': fichiers_importes , 'name':name })
    else:
       return render(request,'import_file/file.html',{'messages' :"Please upload a file!!"})
 
@@ -58,13 +66,14 @@ def import_fil(request):
 
          
 def import_Excel(file,conn):
+    global dc
 
     #read file with pandas
 
     dc=pd.read_excel(file)
 
     #insert informations into file
-
+     
     dc.insert(0,'created_at',datetime.now())
 
     dc.insert(1,'updated_at',datetime.now())
@@ -82,6 +91,7 @@ def import_Excel(file,conn):
     dc.insert(7,'restored_at',datetime.now())
 
     dc.insert(8,'restored_by','thouraya')
+  
 
     
 
@@ -208,7 +218,9 @@ def import_Excel(file,conn):
 
 
 
+
 def delete_file(request, pk):
+    global dc
     file = get_object_or_404(mara_marc_for_MS, pk=pk)
     if request.method == 'POST':
         file.delete()
@@ -219,6 +231,40 @@ def delete_file(request, pk):
 
 
 
-  
+#def file_detail(request):
+ #   global dc
+    
+ #   if dc is None:
+ #     return "Aucune donnée importée."
+
+#      #Conversion des données en une liste de dictionnaires
+#    records = dc.to_dict(orient='records')
+#    return render(request,'import_file/file_detail.html',{'records':records})
+    
+
+import pandas as pd
+from django.http import HttpResponse
+from django.shortcuts import render
+
+def file_detail(request):
+    # Chemin vers le fichier Excel
+    fichier_excel = ''
+
+    try:
+        # Charger le fichier Excel
+        df = pd.read_excel(fichier_excel)
+
+        # Convertir le DataFrame en HTML
+        html_table = df.to_html()
+
+        # Rendre le template avec le contenu du fichier Excel
+        return render(request, 'import_file/file_detail.html', {'html_table': html_table})
+
+    except Exception as e:
+        # Gérer les erreurs lors du chargement du fichier Excel
+        message_erreur = f"Une erreur s'est produite : {str(e)}"
+        return HttpResponse(message_erreur)
+
+
 def test(request):
     return render(request,'home\index.html',{'name':'MSS'})
