@@ -2,12 +2,12 @@ from io import StringIO
 
 
 from django.shortcuts import get_object_or_404, redirect
-import openpyxl
-
-from django.conf import settings
 
 
-from flask import Flask
+
+
+
+
 import pandas as pd
 
 from django.shortcuts import render, redirect 
@@ -18,9 +18,11 @@ import psycopg2
 from .models import Filed
 from datetime import datetime
 from .models import mara_marc_for_MS
-
+from .models import Rule
 from django.urls import reverse
 from django.contrib import messages
+from .models import Rule
+from .forms import RuleForm
 
 # Données importées
 dc = None
@@ -255,7 +257,7 @@ def file_detail(request):
         df = pd.read_excel(fichier_excel)
 
         # Convertir le DataFrame en HTML
-        html_table = df.to_html()
+        html_table = df.to_html()  
 
         # Rendre le template avec le contenu du fichier Excel
         return render(request, 'import_file/file_detail.html', {'html_table': html_table})
@@ -264,6 +266,64 @@ def file_detail(request):
         # Gérer les erreurs lors du chargement du fichier Excel
         message_erreur = f"Une erreur s'est produite : {str(e)}"
         return HttpResponse(message_erreur)
+
+
+def rule_list(request):
+    rules = Rule.objects.all()
+    return render(request,'rules/list_rule.html', {'rules': rules})
+
+
+def rule_detail(request, pk):
+    rule = get_object_or_404(Rule, pk=pk)
+    return render(request, 'rules/rule_detail.html', {'rule': rule})
+
+
+
+def rule_create(request):
+    if request.method == 'POST':
+        form = RuleForm(request.POST)
+        if form.is_valid():
+            rule = form.save(commit=False)
+            rule.created_by = request.user
+            rule.updated_by = request.user
+            rule.save()
+            return redirect('rule_detail', pk=rule.pk)
+    else:
+        form = RuleForm()
+    return render(request, 'rules/rule_form.html', {'form': form})
+
+
+
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def rule_update(request, pk):
+    rule = get_object_or_404(Rule, pk=pk)
+    if request.method == 'POST':
+        form = RuleForm(request.POST, instance=rule)
+        if form.is_valid():
+            rule = form.save(commit=False)
+            rule.updated_by = request.user.username  # Utiliser le nom d'utilisateur
+            rule.save()
+            return redirect('rule_detail', pk=rule.pk)
+    else:
+        form = RuleForm(instance=rule)
+    return render(request, 'rules/rule_form.html', {'form': form})
+
+
+
+def rule_delete(request, pk):
+    rule = get_object_or_404(Rule, pk=pk)
+    if request.method == 'POST':
+        rule.delete()
+        return redirect('rule_list')
+    return render(request, 'rules/rule_confirm_delete.html', {'rule': rule})
+
+
+
+
+
+
 
 
 def test(request):

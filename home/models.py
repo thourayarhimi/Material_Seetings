@@ -48,7 +48,7 @@ class SoftDeleteModel(models.Model):
 
     restored_at = models.DateTimeField(auto_now=True, null=True)
 
-    restored_by = models.CharField(max_length= 30,default='Thouraya ',null=True)
+    restored_by = models.CharField(max_length= 30,default='Thouraya Rhimi  ',null=True)
 
    
 
@@ -84,6 +84,9 @@ class SoftDeleteModel(models.Model):
 class Rule(BaseModel,SoftDeleteModel , models.Model):
     rule_name = models.CharField(max_length=200)
     comment = models.TextField(max_length=200)
+    
+    def __str__(self):
+        return self.rule_name
  
     
     

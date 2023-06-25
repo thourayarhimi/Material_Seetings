@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<meta charset="utf-8">  
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+     <meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+
+   
+</head> 
+<title>Rules </title>
+
+
+<style> 
+
+
+
+
+
+
+
+
+
+
+
+</style>  
+<body> 
+
+ 
+
+<h2>Rule Details</h2>
+<p><strong>Rule Name:</strong> {{ rule.rule_name }}</p>
+<p><strong>Comment:</strong> {{ rule.comment }}</p>
+<p><strong>Created By:</strong> {{ rule.created_by }}</p>
+<p><strong>Updated By:</strong> {{ rule.updated_by }}</p>
+<p><strong>Created At:</strong> {{ rule.created_at }}</p>
+<p><strong>Updated At:</strong> {{ rule.updated_at }}</p>
+
+<p>
+  <a href="{% url 'rule_update' pk=rule.pk %}">Edit</a>
+  <form action="{% url 'rule_delete' pk=rule.pk %}" method="post" style="display: inline;">
+    {% csrf_token %}
+    <input type="submit" value="Delete">
+  </form>
+</p>
+
+<p><a href="{% url 'rule_list' %}">Back to Rule List</a></p>
+
+</body>  
+</html>
+{% endblock %}

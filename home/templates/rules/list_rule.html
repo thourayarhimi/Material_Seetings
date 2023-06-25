@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<meta charset="utf-8">  
+<head>
+     <meta name="viewport" content="width=device-width, initial-scale=1"><link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
+     <meta charset="utf-8">
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>  
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"> </script>  
+   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">  
+
+   
+</head> 
+<title>Rules </title>
+
+
+<style> 
+
+
+
+
+
+
+
+
+
+
+
+</style>  
+<body> 
+
+ 
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+
+        <table  class="table table-sm">
+          <thead>
+            <tr>
+              <th  scope="col">Rule Name</th>
+              <th  scope="col">Comment</th>
+              <th  scope="col">created_at</th>
+              <th  scope="col">updated_at</th>
+              <th  scope="col">created_by</th>
+              <th  scope="col">updated_by </th>
+              <th  scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for rule in rules %}
+              <tr>
+                <td>{{ rule.rule_name }}</td>
+                <td>{{ rule.comment }}</td>
+                <td>{{ rule.created_at }}</td>
+                <td>{{ rule.updated_at }}</td>
+                <td>{{ rule.created_by}}</td>
+                <td>{{ rule.updated_by }}</td>
+
+                <td>
+              
+              <a href=" {% url 'rule_detail' pk=rule.pk %} ">View</a>
+                  <a href="{% url 'rule_update' pk=rule.pk %}">Edit</a>
+                  <form action="{% url 'rule_delete' pk=rule.pk %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">  
+                  </form>
+                </td>
+              </tr>
+            {% empty %}
+              <tr>
+                <td colspan="3">No rules found.</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+        
+      <p><a href="{% url 'rule_create' %}">Create a new rule</a></p> 
+
+      </div>
+    </div>
+  </div>
+
+</body>  
+</html>
+{% endblock %}
