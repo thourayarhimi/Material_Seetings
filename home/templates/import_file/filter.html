@@ -1,0 +1,913 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block content%}
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+  
+            <div class="row">
+                <div class="col-12 grid-margin stretch-card">
+                  <div class="card">
+                    <div class="card-body">
+                     
+
+
+            
+        <div class="table-wrapper">
+          
+  
+
+            {% if data %}
+            <br>   <br>
+            <h2>table <b> filtrer </b></h2>   <br>   <br>
+
+
+    
+
+{% if ms %}
+{{ms}}
+{% endif %}
+
+                      <div class="table-responsive">
+                        <table class="table">
+                            
+                <thead>
+                    
+                    <tr>
+                        {% if 'article' in list %}
+         <th>               article</th>
+         {% endif %}
+         {% if 'designation_article' in list %}
+                     <th>   designation_article</th>
+                     {% endif %}
+                     {% if 'text_article' in list %}
+              <th>          text_article</th>{% endif %}
+                     {% if 'grpe_march' in list %}
+            <th>            grpe_march</th>{% endif %}
+                     {% if 'div' in list %}
+     <th>                   div</th>{% endif %}
+                     {% if 'ctrpr' in list %}
+       <th>                 ctrpr</th>{% endif %}
+                     {% if 'typ_app' in list %}
+         <th>               typ_app</th>{% endif %}
+                     {% if 'a_s' in list %}
+     <th>                   a_s</th>{% endif %}
+                     {% if 'tcy' in list %}
+     <th>                   tcy</th>{% endif %}
+                     {% if 'dfi' in list %}
+     <th>                   dfi</th>{% endif %}
+                     {% if 'dpr' in list %}
+     <th>                   dpr</th>{% endif %}
+                     {% if 'horiz' in list %}
+       <th>                 horiz</th>{% endif %}
+                     {% if 'mp' in list %}
+    <th>                    mp</th>{% endif %}
+                     {% if 'r' in list %}
+   <th>                     r</th>{% endif %}
+                     {% if 'tyar' in list %}
+      <th>                  tyar</th>{% endif %}
+                     {% if 'nal' in list %}
+     <th>                   nal</th>{% endif %}
+                     {% if 'i_c' in list %}
+     <th>                   i_c</th>{% endif %}
+                     {% if 'aappr_def' in list %}
+           <th>             aappr_def</th>{% endif %}
+                     {% if 'mgapp' in list %}
+       <th>                 mgapp</th>{% endif %}
+                     {% if 'mag' in list %}
+     <th>                   mag</th>{% endif %}
+                     {% if 'tl' in list %}
+    <th>                    tl</th>{% endif %}
+                     {% if 'lot_fixe' in list %}
+          <th>              lot_fixe</th>{% endif %}
+                     {% if 'uq1' in list %}
+     <th>                   uq1</th>{% endif %}
+                     {% if 'stock_securite' in list %}
+                <th>        stock_securite</th>{% endif %}
+                     {% if 'uq0' in list %}
+     <th>                   uq0</th>{% endif %}
+                     {% if 'tre' in list %}
+                       
+     <th>                   tre</th>{% endif %}
+                     {% if 'gest' in list %}
+      <th>                  gest</th>{% endif %}
+                     {% if 'di' in list %}
+    <th>                    di</th>{% endif %}
+                     {% if 'rebut' in list %} 
+       <th>                 rebut</th>{% endif %}
+                     {% if 'gac' in list %}
+     <th>                   gac</th>{% endif %}
+                     {% if 'Profil' in list %}
+        <th>                Profil</th>{% endif %}
+                     {% if 'prpiAt' in list %}
+        <th>                prpiAt</th>{% endif %}
+                     {% if 'cree_par' in list %}
+          <th>              cree_par</th>{% endif %}
+                     {% if 'langue' in list %}
+        <th>                langue</th>{% endif %}
+                     {% if 'Cree_le' in list %}
+         <th>               Cree_le</th>{% endif %}
+                     {% if 'gcha' in list %}
+      <th>                  gcha</th>{% endif %}
+                     {% if 'gs' in list %}
+      <th>   gs</th>{% endif %}
+                     {% if 'mode_de_comparaison_des_besoin' in list %}
+                        <th>  mode_de_comparaison_des_besoin</th>{% endif %}
+                     {% if 'int_ajust_amont' in list %}
+                 <th>       int_ajust_amont</th>{% endif %}
+                     {% if 'int_ajust_aval' in list %}
+                <th>        int_ajust_aval</th>{% endif %}
+                     {% if 'taille_l_min' in list %}
+              <th>          taille_l_min</th>{% endif %}
+                     {% if 'uq2' in list %}
+     <th>                   uq2</th>{% endif %}
+                     {% if 'arval_arrondieticle' in list %}
+              <th>          val_arrondie</th>{% endif %}
+                     {% if 'uq3' in list %}
+     <th>                   uq3</th>{% endif %}
+                     {% if 'taille_lot_mx' in list %}
+               <th>         taille_lot_mx</th>{% endif %}
+                     {% if 'uq4' in list %}
+     <th>                   uq4</th>{% endif %}
+                     {% if 'stock_maximum' in list %}
+               <th>         stock_maximum</th>{% endif %}
+                     {% if 'uq5' in list %}
+     <th>                   uq5</th>{% endif %}
+                     {% if 'chant' in list %}
+       <th>                 chant</th>{% endif %}
+                     {% if 'typ' in list %}
+     <th>                   typ</th>{% endif %}
+                     {% if 'delai_sec' in list %}
+           <th>             delai_sec</th>{% endif %}
+                     {% if 'delai_sec1' in list %}
+            <th>            delai_sec1</th>{% endif %}
+                     {% if 'ctrl_destinataire' in list %}
+                   <th>     ctrl_destinataire</th>{% endif %}
+                     {% if 'article_rempl' in list %}
+               <th>         article_rempl</th>{% endif %}
+                     {% if 'dv' in list %}
+    <th>                    dv</th>{% endif %}
+                     {% if 'gml' in list %}
+     <th>                   gml</th>{% endif %}
+                     {% if 'grpl' in list %}
+      <th>                  grpl</th>{% endif %}
+                     {% if 'abc' in list %}
+     <th>                   abc</th>{% endif %}
+                     {% if 'uq6' in list %}
+     <th>                   uq6</th>{% endif %}
+                     {% if 'element_dOTP' in list %}
+              <th>          element_dOTP</th>{% endif %}
+                     {% if 'grpa' in list %}
+      <th>                  grpa</th>{% endif %}
+                     {% if 'Code_pilotage' in list %}
+               <th>         Code_pilotage</th>{% endif %}
+                     {% if 'hierarch_produits' in list %}
+                   <th>     hierarch_produits</th>{% endif %}
+                     {% if 'poids_brut' in list %}
+            <th>            poids_brut</th>{% endif %}
+                     {% if 'unp1' in list %}
+      <th>                  unp1</th>{% endif %}
+                     {% if 'poids_net' in list %}
+           <th>             poids_net</th>{% endif %}
+                     {% if 'unp2' in list %}
+      <th>                  unp2</th>{% endif %}
+                     {% if 'pas_de_ccr' in list %}
+            <th>            pas_de_ccr</th>{% endif %}
+                     {% if 'Taille_de_lot_du_CCR' in list %}
+                      <th>  Taille_de_lot_du_CCR</th>{% endif %}
+                      {% if 'uq7' in list %}
+     <th>                   uq7</th>{% endif %}
+                    
+                        
+                    
+                    </tr>
+                </thead>
+                {% for x in data %}  
+                <tbody> 
+                
+    {%if 'article' in list %}
+                  
+                    <td >               {{x.article}}</td>
+                    {%endif%}
+
+                   {% if 'designation_article' in list %}             <td >               {{x.designation_article}}</td>
+                    {%endif%}
+
+
+                     {% if 'text_article' in list %}
+                    <td >               {{x.text_article}}</td>
+                    {%endif%}
+                     {% if 'grpe_march' in list %}
+                    <td >               {{x.grpe_march}}</td>
+                    {%endif%}
+
+
+
+                     {% if 'div' in list %}
+                    <td >               {{x.div}}</td>
+                    {%endif%}
+                     {% if 'ctrpr' in list %}
+                    <td >               {{x.ctrpr}}</td>
+                    {%endif%}
+
+                     {% if 'typ_app' in list %}
+                    <td >               {{x.typ_app}}</td>
+                    {%endif%}
+                     {% if 'a_s' in list %}
+                    <td >               {{x.a_s}}</td>
+                    {%endif%}
+
+
+                     {% if 'tcy' in list %}
+                    <td >               {{x.tcy}}</td>
+                    {%endif%}
+                     {% if 'dfi' in list %}
+                    <td >               {{x.dfi}}</td>
+                    {%endif%}
+
+                     {% if 'dpr' in list %}
+                    <td >               {{x.dpr}}</td>
+                    {%endif%}
+                     {% if 'horiz' in list %}
+                    <td >               {{x.horiz}}</td>
+                    {%endif%}
+
+                     {% if 'mp' in list %}
+                    <td >               {{x.mp}}</td>
+                    {%endif%}
+                     {% if 'r' in list %}
+                    <td >               {{x.r}}</td>
+                    {%endif%}
+
+                     {% if 'tyar' in list %}
+                    <td >               {{x.tyar}}</td>
+                    {%endif%}
+                     {% if 'nal' in list %}
+                    <td >               {{x.nal}}</td>
+                    {%endif%}
+
+
+
+                     {% if 'i_c' in list %}
+                    <td >               {{x.i_c}}</td>
+                    {%endif%}
+                     {% if 'aappr_def' in list %}
+                    <td >               {{x.aappr_def}}</td>
+                    {%endif%}
+
+                     {% if 'mgapp' in list %}
+                    <td >               {{x.mgapp}}</td>
+                    {%endif%}
+                     {% if 'mag' in list %}
+                    <td >               {{x.mag}}</td>
+                    {%endif%}
+        
+
+
+
+                     {% if 'tl' in list %}
+                    <td >               {{x.tl}}</td>
+                    {%endif%}
+                     {% if 'lot_fixe' in list %}
+                    <td >               {{x.lot_fixe}}</td>
+                    {%endif%}
+
+                     {% if 'uq1' in list %}
+                    <td >               {{x.uq1}}</td>
+                    {%endif%}
+                     {% if 'stock_securite' in list %}
+                    <td >               {{x.stock_securite}}</td>
+                    {%endif%}
+    
+
+                     {% if 'uq0' in list %}
+                    <td >               {{x.uq0}}</td>
+                    {%endif%}
+                     {% if 'tre' in list %}
+                    <td >               {{x.tre}}</td>
+                    {%endif%}
+                     {% if 'gest' in list %}
+                    <td >               {{x.gest}}</td>
+                    {%endif%}
+                     {% if 'di' in list %}
+                    <td >               {{x.di}}</td>
+                    {%endif%}
+
+
+
+
+                     {% if 'rebut' in list %}
+                    <td >               {{x.rebut}}</td>
+                    {%endif%}
+                     {% if 'gac' in list %}
+                    <td >               {{x.gac}}</td>
+                    {%endif%}
+                     {% if 'Profil' in list %}
+                    <td >               {{x.Profil}}</td>
+                    {%endif%}
+                     {% if 'prpiAt' in list %}
+                    <td >               {{x.prpiAt}}</td>
+                    {%endif%}
+  
+
+
+
+
+                     {% if 'cree_par' in list %}
+                    <td >               {{x.cree_par}}</td>
+                    {%endif%}
+                     {% if 'languelangue' in list %}
+                    <td >               {{x.languelangue}}</td>
+                    {%endif%}
+                     {% if 'Cree_le' in list %}
+                    <td >               {{x.Cree_le}}</td>
+                    {%endif%}
+                     {% if 'gcha' in list %}
+                    <td >               {{x.gcha}}</td>
+                    {%endif%}
+       
+
+
+
+
+
+                     {% if 'gs' in list %}
+                    <td >               {{x.gs}}</td>
+                    {%endif%}
+                     {% if 'mode_de_comparaison_des_besoin' in list %}
+                    <td >               {{x.mode_de_comparaison_des_besoin}}</td>
+                    {%endif%}
+                     {% if 'int_ajust_amont' in list %}
+                    <td >               {{x.int_ajust_amont}}</td>
+                    {%endif%}
+                     {% if 'int_ajust_aval' in list %}
+                    <td >               {{x.int_ajust_aval}}</td>
+                    {%endif%}
+             
+
+
+                     {% if 'taille_l_min' in list %}
+                    <td >               {{x.taille_l_min}}</td>
+                    {%endif%}
+                     {% if 'uq2' in list %}
+                    <td >               {{x.uq2}}</td>
+                    {%endif%}
+                     {% if 'val_arrondie' in list %}
+                    <td >               {{x.val_arrondie}}</td>
+                    {%endif%}
+                     {% if 'uq3' in list %}
+                    <td >               {{x.uq3}}</td>
+                    {%endif%}
+          
+
+                     {% if 'taille_lot_mx' in list %}
+                    <td >               {{x.taille_lot_mx}}</td>
+                    {%endif%}
+                     {% if 'uq4' in list %}
+                    <td >               {{x.uq4}}</td>
+                    {%endif%}
+                     {% if 'stock_maximum' in list %}
+                    <td >               {{x.stock_maximum}}</td>
+                    {%endif%}
+                     {% if 'uq5' in list %}
+                    <td >               {{x.uq5}}</td>
+                    {%endif%}
+              
+
+
+                     {% if 'chant' in list %}
+                    <td >               {{x.chant}}</td>
+                    {%endif%}
+                     {% if 'typ' in list %}
+                    <td >               {{x.typ}}</td>
+                    {%endif%}
+                     {% if 'delai_sec' in list %}
+                    <td >               {{x.delai_sec}}</td>
+                    {%endif%}
+                     {% if 'delai_sec1' in list %}
+                    <td >               {{x.delai_sec1}}</td>
+                    {%endif%}
+
+
+
+
+                     {% if 'ctrl_destinataire' in list %}
+                    <td >               {{x.ctrl_destinataire}}</td>
+                    {%endif%}
+                     {% if 'article_rempl' in list %}
+                    <td >               {{x.article_rempl}}</td>
+                    {%endif%}
+                     {% if 'dv' in list %}
+                    <td >               {{x.dv}}</td>
+                    {%endif%}
+                     {% if 'gml' in list %}
+                    <td >               {{x.gml}}</td>
+                    {%endif%}
+  
+                
+
+                     {% if 'grpl' in list %}
+                    <td >               {{x.grpl}}</td>
+                    {%endif%}
+                     {% if 'abc' in list %}
+                    <td >               {{x.abc}}</td>
+                    {%endif%}
+                     {% if 'uq6' in list %}
+                    <td >               {{x.uq6}}</td>
+                    {%endif%}
+                     {% if 'element_dOTP' in list %}
+                    <td >               {{x.element_dOTP}}</td>
+                    {%endif%}
+    
+
+
+                     {% if 'grpa' in list %}
+                    <td >               {{x.grpa}}</td>
+                    {%endif%}
+                     {% if 'Code_pilotage' in list %}
+                    <td >               {{x.Code_pilotage}}</td>
+                    {%endif%}
+                     {% if 'hierarch_produits' in list %}
+                    <td >               {{x.hierarch_produits}}</td>
+                    {%endif%}
+                     {% if 'poids_brut' in list %}
+                    <td >               {{x.poids_brut}}</td>
+                    {%endif%}
+
+
+
+                     {% if 'unp1' in list %}
+                    <td >               {{x.unp1}}</td>
+                    {%endif%}
+                     {% if 'poids_net' in list %}
+                    <td >               {{x.poids_net}}</td>
+                    {%endif%}
+                     {% if 'unp2' in list %}
+                    <td >               {{x.unp2}}</td>
+                    {%endif%}
+                     {% if 'pas_de_ccr' in list %}
+                    <td >               {{x.pas_de_ccr}}</td>
+                    {%endif%}
+ 
+                     {% if 'Taille_de_lot_du_CCR' in list %}
+                    <td >               {{x.Taille_de_lot_du_CCR}}</td>
+                    {%endif%}
+                     {% if 'uq7' in list %}
+                    <td >               {{x.uq7}}</td>
+                    {%endif%}
+                    
+   
+                    {% comment %} <td class="btn btn-outline-danger btn-icon-text">yghj</td>
+                    <td >yghj</td><td class=" btn-outline-danger">yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td>
+               {% endcomment %}  </tbody>
+                {%endfor%}
+            </table>
+            
+        </div>
+    </div>     
+
+
+    {% else %}
+    
+    <div class="table-title">
+        <form method="post" action="{% url 'getfilter' id %}"> 
+            {% csrf_token %}
+        <div class="row" class="drop-container">
+
+
+            <h2>recherche <b> par </b></h2>
+            
+            <br>
+            <div class="form-group row">
+                <label for="rute" class="col-sm-3 col-form-label">filed :</label>
+                <div class="col-sm-9">
+                  
+            <select id="inputState" class="form-control" name="choix">
+                <option selected>Choose...</option>
+                
+                <option >               article</option>
+                <option>   designation_article</option>
+         <option>        text_article</option>
+       <option>            grpe_march</option>
+  <option>                   div</option>
+  <option>                 ctrpr</option>
+    <option>               typ_app</option>
+  <option>                   a_s</option>
+  <option>                   tcy</option>
+  <option>                   dfi</option>
+  <option>                   dpr</option>
+  <option>                 horiz</option>
+  <option>                    mp</option>
+  <option>                     r</option>
+  <option>                  tyar</option>
+  <option>                   nal</option>
+  <option>                   i_c</option>
+      <option>             aappr_def</option>
+  <option>                 mgapp</option>
+  <option>                   mag</option>
+  <option>                    tl</option>
+     <option>              lot_fixe</option>
+  <option>                   uq1</option>
+           <option>        stock_securite</option>
+  <option>                   uq0</option>
+                  
+  <option>                   tre</option>
+  <option>                  gest</option>
+  <option>                    di</option> 
+  <option>                 rebut</option>
+  <option>                   gac</option>
+   <option>                Profil</option>
+   <option>                prpiAt</option>
+     <option>           cree_par</option>
+   <option>               langue</option>
+    <option>               Cree_le</option>
+  <option>                  gcha</option>
+              <option>   gs</option>
+                   <option> mode_de_comparaison_des_besoin</option>
+            <option>      int_ajust_amont</option>
+           <option>        int_ajust_aval</option>
+         <option>          taille_l_min</option>
+  <option>                   uq2</option>
+         <option>          val_arrondie</option>
+  <option>                   uq3</option>
+          <option>         taille_lot_mx</option>
+  <option>                   uq4</option>
+          <option>         stock_maximum</option>
+  <option>                   uq5</option>
+  <option>                 chant</option>
+  <option>                 typ</option>
+      <option>           delai_sec</option>
+       <option>            delai_sec1</option>
+              <option>    ctrl_destinataire</option>
+          <option>         article_rempl</option>
+  <option>                   dv</option>
+  <option>                   gml</option>
+  <option>                  grpl</option>
+  <option>                   abc</option>
+  <option>                   uq6</option>
+         <option>          element_dOTP</option>
+  <option>                grpa</option>
+          <option>       Code_pilotage</option>
+              <option>     hierarch_produits</option>
+       <option>           poids_brut</option>
+  <option>                unp1</option>
+      <option>             poids_net</option>
+  <option>                  unp2</option>
+       <option>            pas_de_ccr</option>
+                 <option> Taille_de_lot_du_CCR</option>
+  <option>                   uq7</option>
+  
+              </select>
+            </div>
+         
+              <div class="form-group row">
+                <label for="rute" class="col-sm-3 col-form-label">condition :</label>
+                <div class="col-sm-9">
+                  <input type="text" class="form-control" id="rute" name="condition" placeholder="Name Rute">
+                </div>
+              
+             
+          
+
+
+            <div class="col-sm-3"><h2>état <b> fichier </b></h2><div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="all"checked disabled>
+                <label class="form-check-label" for="inlineCheckbox2"  >(par defaut all)</label></div>
+            
+            <br>
+           
+
+
+
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="article">
+                <label class="form-check-label" for="inlineCheckbox2">article</label></div>
+                <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="designation_article">
+                <label class="form-check-label" for="inlineCheckbox2">
+designation_article</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="text_article">
+<label class="form-check-label" for="inlineCheckbox2">
+text_article</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="grpe_march">
+<label class="form-check-label" for="inlineCheckbox2">
+grpe_march</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="div">
+<label class="form-check-label" for="inlineCheckbox2">
+div</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="ctrpr">
+<label class="form-check-label" for="inlineCheckbox2">
+ctrpr</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="typ_app">
+<label class="form-check-label" for="inlineCheckbox2">
+typ_app</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="a_s">
+<label class="form-check-label" for="inlineCheckbox2">
+a_s</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tcy">
+<label class="form-check-label" for="inlineCheckbox2">
+tcy</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="dfi">
+<label class="form-check-label" for="inlineCheckbox2">
+dfi</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="dpr">
+<label class="form-check-label" for="inlineCheckbox2">
+dpr</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="horiz">
+<label class="form-check-label" for="inlineCheckbox2">
+horiz</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mp">
+<label class="form-check-label" for="inlineCheckbox2">
+mp</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="r">
+<label class="form-check-label" for="inlineCheckbox2">
+r</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tyar">
+<label class="form-check-label" for="inlineCheckbox2">
+tyar</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="nal">
+<label class="form-check-label" for="inlineCheckbox2">
+nal</label></div>
+            </div>
+            <div class="col-sm-3">
+            
+                <br>
+               
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mgapp">
+<label class="form-check-label" for="inlineCheckbox2">
+mgapp</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mag">
+<label class="form-check-label" for="inlineCheckbox2">
+mag</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tl">
+<label class="form-check-label" for="inlineCheckbox2">
+tl</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="lot_fixe">
+<label class="form-check-label" for="inlineCheckbox2">
+lot_fixe</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq1">
+<label class="form-check-label" for="inlineCheckbox2">
+uq1</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="stock_securite">
+<label class="form-check-label" for="inlineCheckbox2">
+stock_securite</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq0">
+<label class="form-check-label" for="inlineCheckbox2">
+uq0</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tre">
+<label class="form-check-label" for="inlineCheckbox2">
+tre</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gest">
+<label class="form-check-label" for="inlineCheckbox2">
+gest</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="di">
+<label class="form-check-label" for="inlineCheckbox2">
+di</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="rebut">
+<label class="form-check-label" for="inlineCheckbox2">    
+rebut</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gac">
+<label class="form-check-label" for="inlineCheckbox2">
+gac</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Profil">
+<label class="form-check-label" for="inlineCheckbox2">
+Profil</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="prpiAt">
+<label class="form-check-label" for="inlineCheckbox2">
+prpiAt</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="cree_par">
+<label class="form-check-label" for="inlineCheckbox2">
+cree_par</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="langue">
+<label class="form-check-label" for="inlineCheckbox2">
+langue</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Cree_le">
+<label class="form-check-label" for="inlineCheckbox2">
+Cree_le</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gcha">
+<label class="form-check-label" for="inlineCheckbox2">
+gcha</label></div>
+
+
+
+
+
+
+
+                </div>
+            <br>
+            <div class="col-sm-3">
+                <br>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gs">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   gs</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mode_de_comparaison_des_besoin">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   mode_de_comparaison_des_besoin</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="int_ajust_amont">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   int_ajust_amont</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="int_ajust_aval">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   int_ajust_aval</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="taille_l_min">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   taille_l_min</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq2">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   uq2</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="val_arrondie">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   val_arrondie</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq3">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   uq3</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="taille_lot_mx">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   taille_lot_mx</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq4">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   uq4</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="stock_maximum">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   stock_maximum</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq5">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   uq5</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="chant">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   chant</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="typ">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   typ</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="delai_sec">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   delai_sec</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="delai_sec1">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   delai_sec1</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="ctrl_destinataire">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   ctrl_destinataire</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="article_rempl">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   article_rempl</label></div>
+               
+            </div>
+            <div class="col-sm-3">
+                <br>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="dv">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   dv</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gml">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   gml</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="grpl">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   grpl</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="abc">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   abc</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq6">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   uq6</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="element_dOTP">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   element_dOTP</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="grpa">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   grpa</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Code_pilotage">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   Code_pilotage</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="hierarch_produits">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   hierarch_produits</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="ponames_brut">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   ponames_brut</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="unp1">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   unp1</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="ponames_net">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   ponames_net</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="unp2">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   unp2</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="pas_de_ccr">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   pas_de_ccr</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Taille_de_lot_du_CCR">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   Taille_de_lot_du_CCR</label></div>
+                   <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq7">
+                    <label class="form-check-label" for="inlineCheckbox2">
+                   uq7</label></div>
+                   
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="i_c">
+<label class="form-check-label" for="inlineCheckbox2">
+i_c</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="aappr_def">
+<label class="form-check-label" for="inlineCheckbox2">
+aappr_def</label></div>
+            
+
+            </div>
+            <div class='btn btn-info' id="displaymessage" style="display:none;width:100%;margin-top:10px;"></div>
+        </div>
+        <div class="modal-footer"  style="background-color: beige;">
+            <button type="submit" class="btn btn-gradient-success btn-icon-text">Appliquer</button>
+          </div>
+    </form> 
+    </div>
+    {% endif %}
+</div>
+</div>       </div>
+</div>       </div>
+ 
+{% endblock %}

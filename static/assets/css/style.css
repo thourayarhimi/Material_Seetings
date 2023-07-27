@@ -5113,7 +5113,7 @@ textarea.form-control-lg {
       background-color: transparent;
       border-color: transparent; }
   .nav-tabs .nav-link.active,
-  .nav-tabs .nav-item.show .nav-link {
+  .nav-tabs .Forms.show .nav-link {
     color: #343a40;
     background-color: #ffffff;
     border-color: #ebedf2 #ebedf2 #ffffff; }

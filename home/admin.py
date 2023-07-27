@@ -1,23 +1,12 @@
 from django.contrib import admin
-from home.models import Rule
-from home.models import Condition
-from home.models import Result
-from home.models import Profil
-from home.models import Filed
-from home.models import mara_marc_for_MS
-
-
-
+from .models import FileMs
+from .models import File,condition,resulta,rute,lm
 
 # Register your models here.
-admin.site.register(Rule)
-admin.site.register(Condition)
-admin.site.register(Result)
-admin.site.register(Profil)
-admin.site.register(Filed)
-admin.site.register(mara_marc_for_MS)
 
-
-
-
-
+admin.site.register(lm)
+admin.site.register(condition)
+admin.site.register(resulta)
+admin.site.register(rute)
+admin.site.register(FileMs)
+admin.site.register(File)

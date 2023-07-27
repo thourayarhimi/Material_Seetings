@@ -32,13 +32,14 @@
 
 
 </style>  
-<body> 
+
 
  
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-
+        <form  method="post" style="display: inline;">
+          {% csrf_token %}
         <table  class="table table-sm">
           <thead>
             <tr>
@@ -63,12 +64,11 @@
 
                 <td>
               
-              <a href=" {% url 'rule_detail' pk=rule.pk %} ">View</a>
-                  <a href="{% url 'rule_update' pk=rule.pk %}">Edit</a>
-                  <form action="{% url 'rule_delete' pk=rule.pk %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <input type="submit" value="Delete">  
-                  </form>
+              <a href=" {% url 'rule_detail' pk=rule.pk %} "><i class="mdi mdi-format-list-bulleted"></i> </a>
+                  <a href="{% url 'rule_update' pk=rule.pk %}"><i class="mdi mdi-border-color"    ></i></a>
+                  <a href="{% url 'rule_delete' pk=rule.pk %}"><i class="fa fa-trash"    ></i> </a> 
+                  <a href="">condution </a> 
+                  
                 </td>
               </tr>
             {% empty %}
@@ -80,11 +80,10 @@
         </table>
         
       <p><a href="{% url 'rule_create' %}">Create a new rule</a></p> 
-
+    </form>
       </div>
     </div>
   </div>
 
-</body>  
-</html>
+
 {% endblock %}

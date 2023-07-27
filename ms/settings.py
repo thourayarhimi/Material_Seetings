@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+from django.shortcuts import render
 
 from pathlib import Path
 import os
@@ -80,7 +81,7 @@ WSGI_APPLICATION = 'ms.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'ms_db',
+       'NAME': 'MS_db',
        'USER': 'postgres',
        'PASSWORD': '123456789',
        'HOST': 'localhost',
