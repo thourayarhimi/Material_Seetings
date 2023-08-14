@@ -1,4 +1,6 @@
-
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
 <h2>Confirm Deletion</h2>
 <p>Are you sure you want to delete the rule "{{ rule.rule_name }}"?</p>
 <form action="{% url 'rule_delete' pk=rule.pk %}" method="post">
@@ -6,3 +8,4 @@
   <input type="submit" value="Delete">
   <a href="{% url 'rule_detail' pk=rule.pk %}">Cancel</a>
 </form>
+{% endblock %}

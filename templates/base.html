@@ -29,6 +29,7 @@
   </head>
   <body>
     <div class="container-scroller">
+      
 
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
@@ -52,8 +53,8 @@
           <ul class="nav">
 
             <li class="nav-item">
-              <a class="nav-link" href="index.html">
-                <span class="menu-title">Home</span>
+              <a class="nav-link" href="http://127.0.0.1:8008/admin/login/?next=/admin/">
+                <span class="menu-title">Connextion</span>
                 <i class="mdi mdi-home menu-icon"></i>
               </a> 
             </li>
@@ -66,13 +67,19 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="">
+              <a class="nav-link" href="{% url 'rule_list'%}">
                 <span class="menu-title">Rules </span>
                 <i class="mdi mdi-account menu-icon"></i>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="pages/charts/chartjs.html">
+              <a class="nav-link" href="{% url 'List_condition'%}">
+                <span class="menu-title">All condution</span>
+                <i class="mdi mdi-chart-bar menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'resultas_List'%}">
                 <span class="menu-title">All Results</span>
                 <i class="mdi mdi-chart-bar menu-icon"></i>
               </a>
@@ -96,7 +103,7 @@
                   <h6 class="font-weight-normal mb-3">FILE</h6>
                 </div>
             
-              <a href=" {% url 'upload'%}">  <button class="btn btn-block  btn-gradient-info mt-4">+ Importe fichier</button>
+                <a href=" {% url 'upload'%}" ><button class="btn btn-gradient-info mt-4">+ Import fichier</button></a>
               </a>
           
             </li>

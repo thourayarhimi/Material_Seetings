@@ -1,0 +1,196 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block content%} 
+
+
+
+
+  <div class="row">
+  
+
+   
+  
+    <div class="col-12 grid-margin stretch-card">
+      <div class="card">
+       
+        <div class="card-body">
+          <div class="col-sm-4"><h2>List des <b>Conditions</b></h2></div>
+
+
+
+
+
+
+
+
+
+          
+
+      {% block jj %}
+      <form method="post" enctype=""> 
+          {% csrf_token %}
+          
+         
+
+          <div >
+            <div >
+            <label >State</label>
+            <div >
+            <select id="inputState" class="form-control" name="choix">
+                <option selected>Choose...</option>
+              
+                  <option >               article</option>
+                  <option>   designation_article</option>
+                  <option>        text_article</option>
+                  <option>            grpe_march</option>
+                  <option>                   div</option>
+                  <option>                 ctrpr</option>
+                  <option>               typ_app</option>
+                  <option>                   a_s</option>
+                  <option>                   tcy</option>
+                  <option>                   dfi</option>
+                  <option>                   dpr</option>
+                  <option>                 horiz</option>
+                  <option>                    mp</option>
+                  <option>                     r</option>
+                  <option>                  tyar</option>
+                  <option>                   nal</option>
+                  <option>                   i_c</option>
+                  <option>             aappr_def</option>
+                  <option>                 mgapp</option>
+                  <option>                   mag</option>
+                  <option>                    tl</option>
+                  <option>              lot_fixe</option>
+                  <option>                   uq1</option>
+                  <option>        stock_securite</option>
+                  <option>                   uq0</option>
+                                  
+                  <option>                   tre</option>
+                  <option>                  gest</option>
+                  <option>                    di</option> 
+                  <option>                 rebut</option>
+                  <option>                   gac</option>
+                  <option>                Profil</option>
+                  <option>                prpiAt</option>
+                  <option>           cree_par</option>
+                  <option>               langue</option>
+                  <option>               Cree_le</option>
+                  <option>                  gcha</option>
+                  <option>   gs                 </option>
+                  <option> mode_de_comparaison_des_besoin</option>
+                  <option>      int_ajust_amont</option>
+                  <option>        int_ajust_aval</option>
+                  <option>          taille_l_min</option>
+                  <option>                   uq2</option>
+                  <option>          val_arrondie</option>
+                  <option>                   uq3</option>
+                  <option>         taille_lot_mx</option>
+                  <option>                   uq4</option>
+                  <option>         stock_maximum</option>
+                  <option>                   uq5</option>
+                  <option>                 chant</option>
+                  <option>                 typ</option>
+                  <option>           delai_sec</option>
+                  <option>            delai_sec1</option>
+                  <option>    ctrl_destinataire</option>
+                  <option>         article_rempl</option>
+                  <option>                   dv</option>
+                  <option>                   gml</option>
+                  <option>                  grpl</option>
+                  <option>                   abc</option>
+                  <option>                   uq6</option>
+                  <option>          element_dOTP</option>
+                  <option>                grpa</option>
+                  <option>       Code_pilotage</option>
+                  <option>     hierarch_produits</option>
+                  <option>           poids_brut</option>
+                  <option>                unp1</option>
+                  <option>             poids_net</option>
+                  <option>                  unp2</option>
+                  <option>            pas_de_ccr</option>
+                  <option> Taille_de_lot_du_CCR</option>
+                  <option>                   uq7</option>
+
+            </select>
+          </div>
+          </div>
+        </div>
+            <div >
+              <label for="rute" class="col-sm-3 col-form-label">condition :</label>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" id="rute" name="condition" placeholder="Name Rute">
+              </div>
+            
+           
+            </div>
+            <div>
+              <br>
+
+            <button type="submit" class="btn btn-gradient-success btn-icon-text">Ajouter condution </button>
+            </div>
+          {% endblock %}
+      </form>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+              <div class="card-body">
+
+                <table class="table table-hover table-fixed">
+                  <thead>
+                    <tr>
+                      <th> ID </th>
+                      <th> field</th>
+                      <th> case </th>
+                      <th> Action </th>
+                      <th> Resultat </th>
+                      
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {%for x in data %}
+                    <tr>
+                      <td>{{x.pk}}</td>
+                      <td>{{x.field}}</td>
+                      <td class=""> {{x.Con}} </td>
+                      <td class=""> 
+                        <form action="{% url 'delete_condutionn'  x.pk %}" method="post" style="display: inline;">
+                          {% csrf_token %}
+                          <input type="submit" value="Delete">  
+                        </form>
+                        
+                        <button class="btn btn-outline-success btn-icon-text"> Edit <i class="mdi mdi-file-check btn-icon-append"></i></button>
+                      </td>
+                      <td class="col-lg-3"> <a href="{% url 'resultat' x.id %}" >  <button type="button" class="btn btn-gradient-info btn-rounded btn-fw"> ADD Resulta</button></a></td>
+                    </tr>
+                    {%endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>  
+
+
+{% endblock %}

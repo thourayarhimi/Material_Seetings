@@ -32,22 +32,21 @@
 
 
 </style>  
-
+<body> 
 
  
   <div class="col-lg-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <form  method="post" style="display: inline;">
-          {% csrf_token %}
-        <table  class="table table-sm">
+
+        <table  class="table table-hover table-fixed">
           <thead>
             <tr>
               <th  scope="col">Rule Name</th>
-              <th  scope="col">Comment</th>
-              <th  scope="col">created_at</th>
+
+         
               <th  scope="col">updated_at</th>
-              <th  scope="col">created_by</th>
+             
               <th  scope="col">updated_by </th>
               <th  scope="col">Actions</th>
             </tr>
@@ -55,20 +54,23 @@
           <tbody>
             {% for rule in rules %}
               <tr>
-                <td>{{ rule.rule_name }}</td>
-                <td>{{ rule.comment }}</td>
-                <td>{{ rule.created_at }}</td>
+                <td>{{ rule.name }}</td>
+  
+            
                 <td>{{ rule.updated_at }}</td>
-                <td>{{ rule.created_by}}</td>
+                
                 <td>{{ rule.updated_by }}</td>
 
                 <td>
               
-              <a href=" {% url 'rule_detail' pk=rule.pk %} "><i class="mdi mdi-format-list-bulleted"></i> </a>
-                  <a href="{% url 'rule_update' pk=rule.pk %}"><i class="mdi mdi-border-color"    ></i></a>
-                  <a href="{% url 'rule_delete' pk=rule.pk %}"><i class="fa fa-trash"    ></i> </a> 
-                  <a href="">condution </a> 
-                  
+              <a href=" {% url 'rule_detail' pk=rule.pk %} ">View</a>
+                  <a href="{% url 'rule_update' pk=rule.pk %}">Edit</a>
+                 
+                  <form action="{% url 'rule_delete' pk=rule.pk %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <input type="submit" value="Delete">  
+                  </form>
+                  <a href="{% url 'condition' rule.id %}">condution </a>
                 </td>
               </tr>
             {% empty %}
@@ -80,10 +82,11 @@
         </table>
         
       <p><a href="{% url 'rule_create' %}">Create a new rule</a></p> 
-    </form>
+
       </div>
     </div>
   </div>
 
-
+</body>  
+</html>
 {% endblock %}

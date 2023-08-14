@@ -4,9 +4,86 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 # Create your models here.
 
+   
+#BasedModel
 
+class BaseModel(models.Model) :
 
+    date = models.DateTimeField(auto_now=False,auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True)
 
+    imported_by=models.CharField( max_length=50,default=' Rhimi Thouraya')
+
+    updated_by = models.CharField(max_length= 30,default=' Rhimi Thouraya')
+
+   
+
+    class Meta :
+
+         #Django will not create a database table for this model
+
+         abstract = True
+
+ 
+
+#creating a custom model manager to apply the filter
+
+#automatically without using filter(is_delete=False)
+
+ 
+
+#SoftDeleteManager
+
+class SoftDeleteManager(models.Manager):
+
+    def get_queryset(self):
+
+        return super().get_queryset().filter(is_deleted=False)
+#SoftDeleteModel
+
+class SoftDeleteModel(models.Model):
+
+    is_deleted = models.BooleanField(null= False, default=False)
+
+    deleted_by= models.CharField(max_length= 30,null=True)
+
+    deleted_at = models.DateTimeField(auto_now_add=True,null=True)
+
+    restored_at = models.DateTimeField(auto_now=True, null=True)
+
+    restored_by = models.CharField(max_length= 30,default='Thouraya Rhimi  ',null=True)
+
+   
+
+    objects = models.Manager()
+
+    undeleted_objects = SoftDeleteManager()
+
+ 
+
+    def soft_delete(self):
+
+        self.is_deleted = True
+
+        self.save()
+
+ 
+
+    def restore(self):
+
+        self.is_deleted = False
+
+        self.save()
+
+   
+
+ 
+
+    class Meta :
+
+        #Django will not create a database table for this model
+
+        abstract= True
 
 
 
@@ -117,11 +194,13 @@ class FileMs(models.Model):
 
 
 
-class rute (models.Model):
+
+class rute (BaseModel,SoftDeleteModel,models.Model):
    
     name=models.CharField( max_length=50,null=True,blank=True)
-    imported_by=models.CharField( max_length=50,null=True,blank=True)
-    date        = models.DateTimeField(auto_now=False,auto_now_add=True)
+   
+    def __str__(self):
+        return self.name
     
    
 
@@ -129,13 +208,16 @@ class condition (models.Model):
     
     field=models.CharField( max_length=50,null=True,blank=True)
     Con=models.CharField( max_length=50,null=True,blank=True)
-  
+    id_rute=models.ForeignKey(rute,on_delete=models.CASCADE)
+
 
 
 class resulta (models.Model):
     
     field=models.CharField( max_length=50,null=True,blank=True)
     Res=models.CharField( max_length=50,null=True,blank=True)
+    id_condition=models.ForeignKey(condition, on_delete=models.CASCADE)
+  
 
 
 
@@ -145,6 +227,9 @@ class lm (models.Model):
     field=models.CharField( max_length=50,null=True,blank=True)
     vieux=models.CharField( max_length=50,null=True,blank=True)
     nouveau=models.CharField( max_length=50,null=True,blank=True)
+    id_condition=models.ForeignKey(condition, on_delete=models.CASCADE)
+    id_ligne=models.ForeignKey(FileMs,null=True, on_delete=models.CASCADE)
+    id_file=models.ForeignKey(File,null=True, on_delete=models.CASCADE)
 
     
 
