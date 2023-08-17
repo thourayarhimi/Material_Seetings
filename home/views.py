@@ -3,7 +3,7 @@ import io
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import FileMs
-from .models import File,condition
+from .models import File,condition,EquipeMS
 import pandas as pd 
 import psycopg2 
 from django.contrib.auth.models import User
@@ -11,7 +11,9 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import rute,resulta,lm
-from .forms import RuleForm
+from .forms import RuleForm,Equipeform
+
+from django.shortcuts import render, redirect
 
 
 
@@ -332,6 +334,53 @@ def getfilter(request,id):
     
     print  (context['list'])  
     return render(request,'import_file/filter.html',context )
+
+###
+
+def equipe_list(request):
+    equipes = EquipeMS.objects.all()
+    return render(request,'EquipeMS/list_ms.html', {'equipes': equipes})
+ 
+def equipe_create(request):
+    if request.method == 'POST':
+        name = request.POST['name']
+        email = request.POST['email']
+        Phone = request.POST['Phone']
+        equipement = EquipeMS(name=name, email=email, Phone=Phone)
+        equipement.save()
+        return redirect('equipe_list')
+    return render(request,'EquipeMS/list_ms.html')
+
+
+def Edit(request):
+    emp = EquipeMS.objects.all()
+    context ={
+        'emp':emp,
+             }
+    return redirect(request,'EquipeMS/list_ms.html',context)
+def update(request,id):
+    if request.method == 'POST':
+        
+        name = request.POST['name']
+        email = request.POST['email']
+        Phone = request.POST['Phone']
+        equipement = EquipeMS(
+            id=id,name=name, email=email, Phone=Phone)
+        equipement.save()
+        return redirect('equipe_list')
+    return redirect(request,'EquipeMS/list_ms.html')
+
+def delete(request, id):
+    emp=EquipeMS.objects.filter(id=id)
+    emp.delete()
+    context ={
+        'emp':emp,
+             }
+    
+    return redirect('equipe_list')
+
+
+
 
 
 
@@ -747,12 +796,12 @@ def table(request,id):
            
         
         return render(request,'import_file/import.html',context )
-
-
-
-
-
-
     
-        
     return render(request,'import_file/import.html',context )
+
+
+
+
+
+
+

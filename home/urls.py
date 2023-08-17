@@ -37,6 +37,14 @@ urlpatterns = [
     
     path('table<int:id>', views.table,name='table'),
     
+    
+    
+    path('equipe_list/', views.equipe_list, name='equipe_list'),
+    path('equipe/', views.equipe_create, name='equipe_create'),
+    path('edit/', views.Edit, name='edit'),
+    path('Update/<str:id>/', views.update,name='update'),
+    path('Delete/<str:id>/', views.delete,name='delete'),
+ 
 
 
 

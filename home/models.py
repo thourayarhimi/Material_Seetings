@@ -231,7 +231,14 @@ class lm (models.Model):
     id_ligne=models.ForeignKey(FileMs,null=True, on_delete=models.CASCADE)
     id_file=models.ForeignKey(File,null=True, on_delete=models.CASCADE)
 
-    
+class EquipeMS (models.Model):
+   
+    name=models.CharField( max_length=50,null=True,blank=True)
+    email = models.EmailField()
+    Phone= models.IntegerField()
+   
+    def __str__(self):
+        return self.name
 
 
 
