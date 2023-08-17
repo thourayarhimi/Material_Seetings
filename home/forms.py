@@ -18,10 +18,6 @@ class RuleForm(forms.ModelForm):
         fields = ['name']  
         
         
-class Equipeform(forms.ModelForm):
-    class Meta:
-        model = EquipeMS
-        fields = ['name','email','Phone'] 
         
 
  

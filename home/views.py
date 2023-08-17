@@ -3,7 +3,8 @@ import io
 from django.urls import reverse
 from django.shortcuts import get_object_or_404, render,redirect
 from .models import FileMs
-from .models import File,condition,EquipeMS
+from .models import condition,EquipeMS
+from .models import File
 import pandas as pd 
 import psycopg2 
 from django.contrib.auth.models import User
@@ -11,7 +12,7 @@ from django.contrib.auth.models import User
 
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import rute,resulta,lm
-from .forms import RuleForm,Equipeform
+from .forms import RuleForm
 
 from django.shortcuts import render, redirect
 
@@ -35,10 +36,9 @@ def file(request):
 
 
 
-
 def upload(request):
     context = {}
-    template = "import_file/upload_file.html"
+  
 
 
     if request.method == "GET":
@@ -60,8 +60,12 @@ def upload(request):
         import_ms_file(request,file,conn) 
         file=File.objects.all()
         context['data']=file       
-      
+       
     return render(request , 'import_file/file.html' , context)
+
+
+
+
 
 
 
