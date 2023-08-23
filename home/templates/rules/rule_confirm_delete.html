@@ -1,11 +1,25 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h2>Confirm Deletion</h2>
-<p>Are you sure you want to delete the rule "{{ rule.rule_name }}"?</p>
-<form action="{% url 'rule_delete' pk=rule.pk %}" method="post">
-  {% csrf_token %}
-  <input type="submit" value="Delete">
-  <a href="{% url 'rule_detail' pk=rule.pk %}">Cancel</a>
-</form>
+
+
+
+
+<div class="col-12 grid-margin stretch-card">
+  <div class="card">
+   
+    <div class="card-body">
+                <div class="col-sm-4"><h2>Confirm Deletion</h2></div>
+          
+          <p>Are you sure you want to delete the rule "{{ rule.name }}"?</p>
+          <form action="{% url 'rule_delete' pk=rule.pk %}" method="post">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-outline-danger" value="Delete">
+            <button type="button" class="btn btn-outline-secondary"><a href="{% url 'rule_detail' pk=rule.pk %}">Cancel</a></button>
+
+
+          </form>
+        </div>
+      </div>
+    </div>
 {% endblock %}

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+    
+    <div id="chat-container">
+        <div id="chat-history">
+            {% for message in chat_history %}
+                <p {% if message.is_user %}class="user-message"{% else %}class="bot-message"{% endif %}>
+                    {{ message.text }}
+                </p>
+            {% endfor %}
+        </div>
+        <form id="chat-form" method="post">
+            {% csrf_token %}
+            <input type="text" id="user-input" placeholder="Type your message here">
+            <button id="send-button" type="button">Send</button>
+            <!-- chatbot.html -->
+
+            <a href="{% url 'chatbot' %}?clear_history=true" id="clear-history-button">Supprimer l'historique</a>
+
+        </form>
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#send-button').on('click', function () {
+                const userMessage = $('#user-input').val();
+                $('#chat-history').append(`<p class="user-message">${userMessage}</p>`);
+                $('#user-input').val('');
+        
+                const csrfToken = $('[name=csrfmiddlewaretoken]').val();  // Récupère le jeton CSRF
+                $.ajax({
+                    url: '',
+                    type: 'POST',
+                    data: {
+                        user_input: userMessage,
+                        csrfmiddlewaretoken: csrfToken  // Inclure le jeton CSRF dans les données
+                    },
+                    success: function (data) {
+                        const botResponse = data.bot_response;
+                        $('#chat-history').append(`<p class="bot-message">${botResponse}</p>`);
+                    }
+                });
+            });
+
+            $('#clear-history-button').on('click', function () {
+                if (confirm("Êtes-vous sûr de vouloir supprimer l'historique ?")) {
+                    $('#chat-history').empty();
+                    // Vous pouvez également faire une requête AJAX pour informer le serveur de la suppression
+                }
+            });
+        });
+        
+    </script>
+
+
+
+{% endblock %}

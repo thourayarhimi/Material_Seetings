@@ -8,10 +8,10 @@ from .models import File
 import pandas as pd 
 import psycopg2 
 from django.contrib.auth.models import User
-
-
+import xlwt
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import rute,resulta,lm
+from .models import rute,resulta,lm,ChatMessage
 from .forms import RuleForm
 
 from django.shortcuts import render, redirect
@@ -362,6 +362,7 @@ def Edit(request):
         'emp':emp,
              }
     return redirect(request,'EquipeMS/list_ms.html',context)
+
 def update(request,id):
     if request.method == 'POST':
         
@@ -383,7 +384,9 @@ def delete(request, id):
     
     return redirect('equipe_list')
 
-
+def equipement_detail(request, id):
+    equipement = get_object_or_404(EquipeMS, id=id)
+    return render(request, 'EquipeMS/detail.html', {'equipement': equipement})
 
 
 
@@ -423,18 +426,25 @@ def rule_create(request):
 
 
 
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def rule_update(request, pk):
     rule = get_object_or_404(rute, pk=pk)
+    
     if request.method == 'POST':
+        form = RuleForm(request.POST, instance=rule)
       
         if form.is_valid():
             rule = form.save(commit=False)
-            rule.updated_by = request.user  # Utiliser le nom d'utilisateur
+            rule.updated_by = request.user.username  # Utiliser le nom d'utilisateur
             rule.save()
             return redirect('rule_detail', pk=rule.pk)
     else:
         form = RuleForm(instance=rule)
+    
     return render(request, 'rules/rule_form.html', {'form': form})
+
 
 
 
@@ -539,7 +549,7 @@ def table(request,id):
     nu_case=0
     case_non_treter=0
     classs=""
-    
+    file=File.objects.all()
     d=FileMs.objects.filter(file_id=id)
    
     condi=lm.objects.filter(id_file=id)
@@ -801,11 +811,141 @@ def table(request,id):
         
         return render(request,'import_file/import.html',context )
     
-    return render(request,'import_file/import.html',context )
+    return render(request,'import_file/import.html',context    )
+
+
+def export (request,id):
+      article=[]
+      k=0
+      if(request.POST['name']!="vide"):
+        field=request.POST['name']  
+        extension = '.xls'
+        response = HttpResponse(content_type= 'application/ms-excel')
+        response ['Content-Disposition'] ='attachment; filename={}/nouveau{}'.format(field, extension)
+        
+        wb = xlwt.Workbook (encoding='utf-8')
+        
+        ws = wb.add_sheet('Expenses')
+        row_num = 0
+        font_style = xlwt.XFStyle()
+        font_style.font.bold = True
+        columns = [
+                
+                'article',
+       'designation_article',
+       'text_article',
+       'grpe_march',
+       'div',
+       'ctrpr',
+       'typ_app',
+       'a_s',
+       'tcy',
+       'dfi',
+       'dpr',
+       'horiz',
+       'mp',
+       'r',
+       'tyar',
+       'nal',
+       'i_c',
+       'aappr_def',
+       'mgapp',
+       'mag',
+       'tl',
+       'lot_fixe',
+       'uq1',
+       'stock_securite',
+       'uq0',
+       'tre',
+       'gest',
+       'di',    
+       'rebut',
+       'gac',
+       'Profil',
+       'prpiAt',
+       'cree_par',
+       'langue',
+       'Cree_le',
+       'gcha',
+       'gs',
+       'mode_de_comparaison_des_besoin',
+       'int_ajust_amont',
+       'int_ajust_aval',
+       'taille_l_min',
+       'uq2',
+       'val_arrondie',
+       'uq3',
+       'taille_lot_mx',
+       'uq4',
+       'stock_maximum',
+       'uq5',
+       'chant',
+       'typ',
+       'delai_sec',
+       'delai_sec1',
+       'ctrl_destinataire',
+       'article_rempl',
+       'dv',
+       'gml',
+       'grpl',
+       'abc',
+       'uq6',
+       'element_dOTP',
+       'grpa',
+       'Code_pilotage',
+       'hierarch_produits',
+       'poids_brut',
+       'unp1',
+       'poids_net',
+       'unp2',
+       'pas_de_ccr',
+       'Taille_de_lot_du_CCR',
+       'uq7']
+        for col_nun in range(len(columns)):
+          ws.write(row_num, col_nun, columns[col_nun],font_style)
+
+        font_style = xlwt.XFStyle()
+
+
+
+        d=FileMs.objects.filter(file_id=id).values_list()
+        for row in d :    
+            row_num+=1
+            x=0
+            for col_num in range(len(row)-2):
+                    x+=1
+                    ws.write(row_num,col_num,str(row[x]),font_style)
+                    
+
+        wb.save(response)
+
+                
+       
+
+      return response
+  
 
 
 
 
 
 
+from django.shortcuts import render
+from django.http import JsonResponse
+from .models import ChatMessage
+from .ai_module import generate_response  # Importez la fonction depuis votre module d'IA
 
+def chatbot(request):
+    if request.method == 'POST':
+        user_input = request.POST.get('user_input')
+        ChatMessage.objects.create(text="vou: " + user_input, is_user=True)
+        bot_response = generate_response(user_input)  # Utilisez votre IA pour générer une réponse
+        ChatMessage.objects.create(text="BOT: " + bot_response, is_user=False)
+
+        return JsonResponse({'bot_response': bot_response})
+
+    elif request.method == 'GET' and 'clear_history' in request.GET:
+        ChatMessage.objects.all().delete()
+        return redirect('chatbot')
+    chat_history = ChatMessage.objects.all()
+    return render(request, 'Chatbot/chat.html', {'chat_history': chat_history})

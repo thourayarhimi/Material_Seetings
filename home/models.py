@@ -242,4 +242,11 @@ class EquipeMS (models.Model):
 
 
 
+class ChatMessage(models.Model):
+    text = models.TextField()
+    is_user = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.text
 

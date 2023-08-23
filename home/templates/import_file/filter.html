@@ -1,18 +1,204 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block content %}
 
-{%block content%}
+<style>
+  .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+  </style>
 
 
+
+
+    
+  
+    
+  <div class="row">
+    
+
+    <div class="col-12 grid-margin stretch-card">
+        
+      <div class="card">
+      
+        <div class="card-body">
 
 
 
 
             <div class="row">
-                <div class="col-12 grid-margin stretch-card">
+                <div class="col-12 grid-margin">
                   <div class="card">
                     <div class="card-body">
                      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                      <style>
+ 
+      
+                        .drop-container {
+                          position: relative;
+                          display: flex;
+                          gap: 10px;
+                          flex-direction: column;
+                          justify-content: center;
+                          align-items: center;
+                          height: 200px;
+                          padding: 20px;
+                          border-radius: 10px;
+                          border: 2px dashed #555;
+                          color: #444;
+                          cursor: pointer;
+                          transition: background .2s ease-in-out, border .2s ease-in-out;
+                        }
+                        
+                        .drop-container:hover {
+                          background: #eee;
+                          border-color: #111;
+                        }
+                        
+                        .drop-container:hover .drop-title {
+                          color: #222;
+                        }
+                        
+                        .drop-title {
+                          color: #444;
+                          font-size: 20px;
+                          font-weight: bold;
+                          text-align: center;
+                          transition: color .2s ease-in-out;
+                        }
+                        
+                        input[type=file] {
+                          width: 350px;
+                          max-width: 100%;
+                          color: #444;
+                          padding: 5px;
+                          background: #fff;
+                          border-radius: 10px;
+                          border: 1px solid #555;
+                        }
+                        
+                        input[type=file]::file-selector-button {
+                          margin-right: 20px;
+                          border: none;
+                          background: #084cdf;
+                          padding: 10px 20px;
+                          border-radius: 10px;
+                          color: #fff;
+                          cursor: pointer;
+                          transition: background .2s ease-in-out;
+                        }
+                        
+                        input[type=file]::file-selector-button:hover {
+                          background: #0d45a5;
+                        }
+                  </style>
+                  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             
@@ -27,7 +213,9 @@
 
     
 
-
+{% if ms %}
+{{ms}}
+{% endif %}
 
                       <div class="table-responsive">
                         <table class="table">
@@ -457,7 +645,10 @@
                     <td >               {{x.uq7}}</td>
                     {%endif%}
                     
-                 </tbody>
+   
+                    {% comment %} <td class="btn btn-outline-danger btn-icon-text">yghj</td>
+                    <td >yghj</td><td class=" btn-outline-danger">yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td>
+               {% endcomment %}  </tbody>
                 {%endfor%}
             </table>
             
@@ -474,15 +665,23 @@
 
 
             
+            
+            <br>
+            <div class="form-group row">
+               
+                <div class="col-sm-9">
+                  
+
             </div>
          
+              <div class="form-group row">
             
               
-             
+            </div>
           
 
 
-            <div class="col-sm-3"><h2>état <b> fichier </b></h2><div class="form-check form-check-inline">
+            <div class="col-sm-3"><h2>Fichier de ID: <b>{{id}} </b></h2><div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="all"checked disabled>
                 <label class="form-check-label" for="inlineCheckbox2"  >(par defaut all)</label></div>
             
@@ -497,140 +696,140 @@
                 <div class="form-check form-check-inline">
                 <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="designation_article">
                 <label class="form-check-label" for="inlineCheckbox2">
-                designation_article</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="text_article">
-                <label class="form-check-label" for="inlineCheckbox2">
-                text_article</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="grpe_march">
-                <label class="form-check-label" for="inlineCheckbox2">
-                grpe_march</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="div">
-                <label class="form-check-label" for="inlineCheckbox2">
-                div</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="ctrpr">
-                <label class="form-check-label" for="inlineCheckbox2">
-                ctrpr</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="typ_app">
-                <label class="form-check-label" for="inlineCheckbox2">
-                typ_app</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="a_s">
-                <label class="form-check-label" for="inlineCheckbox2">
-                a_s</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tcy">
-                <label class="form-check-label" for="inlineCheckbox2">
-                tcy</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="dfi">
-                <label class="form-check-label" for="inlineCheckbox2">
-                dfi</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="dpr">
-                <label class="form-check-label" for="inlineCheckbox2">
-                dpr</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="horiz">
-                <label class="form-check-label" for="inlineCheckbox2">
-                horiz</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mp">
-                <label class="form-check-label" for="inlineCheckbox2">
-                mp</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="r">
-                <label class="form-check-label" for="inlineCheckbox2">
-                r</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tyar">
-                <label class="form-check-label" for="inlineCheckbox2">
-                tyar</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="nal">
-                <label class="form-check-label" for="inlineCheckbox2">
-                nal</label></div>
-                            </div>
-                            <div class="col-sm-3">
-                            
-                                <br>
-                            
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mgapp">
-                <label class="form-check-label" for="inlineCheckbox2">
-                mgapp</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mag">
-                <label class="form-check-label" for="inlineCheckbox2">
-                mag</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tl">
-                <label class="form-check-label" for="inlineCheckbox2">
-                tl</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="lot_fixe">
-                <label class="form-check-label" for="inlineCheckbox2">
-                lot_fixe</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq1">
-                <label class="form-check-label" for="inlineCheckbox2">
-                uq1</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="stock_securite">
-                <label class="form-check-label" for="inlineCheckbox2">
-                stock_securite</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq0">
-                <label class="form-check-label" for="inlineCheckbox2">
-                uq0</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tre">
-                <label class="form-check-label" for="inlineCheckbox2">
-                tre</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gest">
-                <label class="form-check-label" for="inlineCheckbox2">
-                gest</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="di">
-                <label class="form-check-label" for="inlineCheckbox2">
-                di</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="rebut">
-                <label class="form-check-label" for="inlineCheckbox2">    
-                rebut</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gac">
-                <label class="form-check-label" for="inlineCheckbox2">
-                gac</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Profil">
-                <label class="form-check-label" for="inlineCheckbox2">
-                Profil</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="prpiAt">
-                <label class="form-check-label" for="inlineCheckbox2">
-                prpiAt</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="cree_par">
-                <label class="form-check-label" for="inlineCheckbox2">
-                cree_par</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="langue">
-                <label class="form-check-label" for="inlineCheckbox2">
-                langue</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Cree_le">
-                <label class="form-check-label" for="inlineCheckbox2">
-                Cree_le</label></div>
-                <div class="form-check form-check-inline">
-                <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gcha">
-                <label class="form-check-label" for="inlineCheckbox2">
-                gcha</label></div>
+designation_article</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="text_article">
+<label class="form-check-label" for="inlineCheckbox2">
+text_article</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="grpe_march">
+<label class="form-check-label" for="inlineCheckbox2">
+grpe_march</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="div">
+<label class="form-check-label" for="inlineCheckbox2">
+div</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="ctrpr">
+<label class="form-check-label" for="inlineCheckbox2">
+ctrpr</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="typ_app">
+<label class="form-check-label" for="inlineCheckbox2">
+typ_app</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="a_s">
+<label class="form-check-label" for="inlineCheckbox2">
+a_s</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tcy">
+<label class="form-check-label" for="inlineCheckbox2">
+tcy</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="dfi">
+<label class="form-check-label" for="inlineCheckbox2">
+dfi</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="dpr">
+<label class="form-check-label" for="inlineCheckbox2">
+dpr</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="horiz">
+<label class="form-check-label" for="inlineCheckbox2">
+horiz</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mp">
+<label class="form-check-label" for="inlineCheckbox2">
+mp</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="r">
+<label class="form-check-label" for="inlineCheckbox2">
+r</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tyar">
+<label class="form-check-label" for="inlineCheckbox2">
+tyar</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="nal">
+<label class="form-check-label" for="inlineCheckbox2">
+nal</label></div>
+            </div>
+            <div class="col-sm-3">
+            
+                <br>
+               
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mgapp">
+<label class="form-check-label" for="inlineCheckbox2">
+mgapp</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="mag">
+<label class="form-check-label" for="inlineCheckbox2">
+mag</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tl">
+<label class="form-check-label" for="inlineCheckbox2">
+tl</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="lot_fixe">
+<label class="form-check-label" for="inlineCheckbox2">
+lot_fixe</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq1">
+<label class="form-check-label" for="inlineCheckbox2">
+uq1</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="stock_securite">
+<label class="form-check-label" for="inlineCheckbox2">
+stock_securite</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq0">
+<label class="form-check-label" for="inlineCheckbox2">
+uq0</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="tre">
+<label class="form-check-label" for="inlineCheckbox2">
+tre</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gest">
+<label class="form-check-label" for="inlineCheckbox2">
+gest</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="di">
+<label class="form-check-label" for="inlineCheckbox2">
+di</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="rebut">
+<label class="form-check-label" for="inlineCheckbox2">    
+rebut</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gac">
+<label class="form-check-label" for="inlineCheckbox2">
+gac</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Profil">
+<label class="form-check-label" for="inlineCheckbox2">
+Profil</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="prpiAt">
+<label class="form-check-label" for="inlineCheckbox2">
+prpiAt</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="cree_par">
+<label class="form-check-label" for="inlineCheckbox2">
+cree_par</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="langue">
+<label class="form-check-label" for="inlineCheckbox2">
+langue</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="Cree_le">
+<label class="form-check-label" for="inlineCheckbox2">
+Cree_le</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="gcha">
+<label class="form-check-label" for="inlineCheckbox2">
+gcha</label></div>
 
 
 
@@ -784,19 +983,19 @@
                     <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="uq7">
                     <label class="form-check-label" for="inlineCheckbox2">
                    uq7</label></div>
-                                    
-                    <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="i_c">
-                    <label class="form-check-label" for="inlineCheckbox2">
-                    i_c</label></div>
-                    <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="aappr_def">
-                    <label class="form-check-label" for="inlineCheckbox2">
-                    aappr_def</label></div>
+                   
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="i_c">
+<label class="form-check-label" for="inlineCheckbox2">
+i_c</label></div>
+<div class="form-check form-check-inline">
+<input class="form-check-input" type="checkbox" name="inlineCheckbox2" value="aappr_def">
+<label class="form-check-label" for="inlineCheckbox2">
+aappr_def</label></div>
             
 
-            </div>
-            <div class='btn btn-info' id="displaymessage" style="display:none;width:100%;margin-top:10px;"></div>
+           
+            
         </div>
         <div class="modal-footer"  style="background-color: beige;">
             <button type="submit" class="btn btn-gradient-success btn-icon-text">Appliquer</button>
@@ -807,5 +1006,5 @@
 </div>
 </div>       </div>
 </div>       </div>
- 
+</div>  
 {% endblock %}

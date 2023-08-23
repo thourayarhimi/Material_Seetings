@@ -36,6 +36,7 @@ urlpatterns = [
     
     
     path('table<int:id>', views.table,name='table'),
+    path('export<int:id>', views.export,name='export'),
     
     
     
@@ -44,7 +45,11 @@ urlpatterns = [
     path('edit/', views.Edit, name='edit'),
     path('Update/<str:id>/', views.update,name='update'),
     path('Delete/<str:id>/', views.delete,name='delete'),
- 
+    path('Detaille/<int:id>/', views.equipement_detail,name='equipement_detail'),
+     
+    
+    path('chatbot/',views.chatbot, name='chatbot'),
+
 
 
 

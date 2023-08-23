@@ -236,7 +236,7 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                               </button>
                             </div>
                             {% block tt %}
-                            <form method="post" action=""> 
+                            <form method="post" action="{% url 'export' id %}"> 
                                 {% csrf_token %}
                                
                     
@@ -370,7 +370,7 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
           
             <div class="table-title">
                 <div class="row">
-                    <div class="col-sm-5"><h2>état <b> fichier </b></h2></div>
+                    <div class="col-sm-5"><h2> Fichier de ID: <b> {{id}} </b></h2></div>
                    
                     <div class="col-sm-7">
 
@@ -933,10 +933,7 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                     <td >               {{x.uq7}}</td>
                     {%endif%}
                     
-   
-                    {% comment %} <td class="btn btn-outline-danger btn-icon-text">yghj</td>
-                    <td >yghj</td><td class=" btn-outline-danger">yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td><td>yghj</td>
-               {% endcomment %}  </tbody>
+     </tbody>
                 {%endfor%}
             </table>
         
