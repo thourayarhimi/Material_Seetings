@@ -1,8 +1,130 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.query import QuerySet
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.base_user import BaseUserManager
+from django.db import models
+from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.utils.translation import gettext_lazy as _
+
+
+
+
+
 # Create your models here.
+class CustomUserManager(BaseUserManager):
+    def create_user(self, email, username,password=None, **extra_fields):
+        extra_fields.setdefault('username',username)  # Utiliser l'adresse email comme nom d'utilisateur
+        if not email:
+            raise ValueError(_('L\'adresse email doit être renseignée.'))
+        
+        email = self.normalize_email(email)
+        user = self.model(email=email, **extra_fields)
+        user.set_password(password)
+        user.save()
+        return user
+
+
+    def create_superuser(self, email, password=None, **extra_fields):
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+
+        if extra_fields.get('is_staff') is not True:
+            raise ValueError(_('Un superutilisateur doit avoir is_staff=True.'))
+        if extra_fields.get('is_superuser') is not True:
+            raise ValueError(_('Un superutilisateur doit avoir is_superuser=True.'))
+
+        return self.create_user(email, password, **extra_fields)
+
+
+class CustomUser(AbstractUser):
+    USER_ROLE_CHOICES = (
+        ('user', 'Utilisateur'),
+        ('manager', 'Manager'),
+        ('admin', 'Admin'),
+    )
+    
+    email = models.EmailField(_('adresse email'), unique=True)
+    username = models.CharField(_('nom d\'utilisateur'), max_length=30, unique=True)
+    role = models.CharField(_('rôle'), max_length=20, choices=USER_ROLE_CHOICES, default='user')
+
+    objects = CustomUserManager()
+
+    def __str__(self):
+        return self.email
+        def save(self, *args, **kwargs):
+            if not self.username:
+              self.username = self.email
+        super().save(*args, **kwargs)
+
+from django.contrib.auth import get_user_model
+
+def is_admin(CustomUser):
+    return CustomUser.role == 'admin' if CustomUser else False
+
+User = get_user_model()
+User.add_to_class('is_admin', is_admin)
+    
+    
+
+
+
+class CustomUserPermissions(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    can_create_equipe = models.BooleanField(default=False)
+    can_read_equipe = models.BooleanField(default=False)
+    can_update_equipe = models.BooleanField(default=False)
+    can_delete_equipe = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username
+
+
+
+# class CustomUserPermissions(models.Model):
+# user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+# can_access_manager_functionality = models.BooleanField(default=False)
+# can_access_employer_functionality = models.BooleanField(default=False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    
 #BasedModel
@@ -93,11 +215,30 @@ class SoftDeleteModel(models.Model):
 
 
 
+
+
+    
+    
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 class File (models.Model):
     id = models.AutoField(primary_key=True)
     name= models.CharField( max_length=50,null=False,blank=True)
-    timestamp  = models.DateTimeField(auto_now=False,auto_now_add=True)
-    imported_by = models.CharField( max_length=50,default='Rhimi  Thouraya')
+    imported_by =models.CharField( max_length=50,null=True,blank=True)
+    timestamp        = models.DateTimeField(auto_now=False,auto_now_add=True)
     updated          = models.DateTimeField(auto_now=True, auto_now_add=False)
     def __str__(self):
         return str(self.id)
@@ -249,4 +390,3 @@ class ChatMessage(models.Model):
 
     def __str__(self):
         return self.text
-

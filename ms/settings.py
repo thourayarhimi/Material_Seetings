@@ -50,7 +50,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-     'django.contrib.messages.middleware.MessageMiddleware'
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
 ]
 
 ROOT_URLCONF = 'ms.urls'
@@ -81,7 +82,7 @@ WSGI_APPLICATION = 'ms.wsgi.application'
 DATABASES = {
     'default': {
        'ENGINE': 'django.db.backends.postgresql',
-       'NAME': 'MS_db',
+       'NAME': '1998_db',
        'USER': 'postgres',
        'PASSWORD': '123456789',
        'HOST': 'localhost',
@@ -141,4 +142,4 @@ MEDIA_ROOT=BASE_DIR/'images'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
+AUTH_USER_MODEL = 'home.CustomUser'

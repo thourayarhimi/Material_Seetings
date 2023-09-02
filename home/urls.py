@@ -8,7 +8,12 @@ from home import views
 
 urlpatterns = [
 
-    path('', views.home,name='home'),
+    path('', views.home,name='index'),
+    path('register', views.register,name='home'),
+    path('log/', views.custom_login, name='log'),
+
+   
+    path('profile/', views.profile, name='profile'),
     path('file/', views.file,name='file'),
     path('upload/', views.upload,name='upload'),
     path('delit<int:id>/', views.delit,name='delit'),
@@ -49,6 +54,7 @@ urlpatterns = [
      
     
     path('chatbot/',views.chatbot, name='chatbot'),
+    path('test<int:id>', views.test,name='test'),
 
 
 

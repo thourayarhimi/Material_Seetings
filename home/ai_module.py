@@ -21,7 +21,7 @@ def generate_response(user_input):
     # Recherche de la question dans la liste
     if user_input in questions:
         index = questions.index(user_input)
-        response = "BOT: "+ responses[index]
+        response = "   bot: "+ responses[index]
     else:
         response = "Je ne suis pas sûr de comprendre. Pouvez-vous reformuler votre question ?"
     

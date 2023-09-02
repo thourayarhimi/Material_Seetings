@@ -15,30 +15,106 @@ from .models import rute,resulta,lm,ChatMessage
 from .forms import RuleForm
 
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
 
+from django.shortcuts import render, redirect
+from django.core.validators import validate_email
+from django.contrib.auth.models import User
+from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
+from django.core.mail import EmailMessage
+from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
+from .models import CustomUser
 
-
+from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, redirect, get_object_or_404
+from .models import EquipeMS
 
 # Create your views here.
 
 
-    
 def home(request):
-    return render(request,'home\index.html')
+
+
+  return render(request, 'home/index.html')
+
+
+CustomUser = get_user_model()
+def register(request):
+
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        username = request.POST['username']
+        role = request.POST['role']
+        CustomUser.objects.create_user(email=email, username=username, password=password, role=role)
+
+        return redirect('log')
+    return render(request, 'home/register.html')
+
+
+
+def custom_login(request):
+    if request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+        username = request.POST['username']
+      
+        user = CustomUser.objects.filter(email=email).first()
+        if user:
+            auth_user = authenticate(username=username, password=password )
+            if auth_user:
+                login(request, auth_user)
+                
+                return render(request, 'home/profile.html')
+
+            else:
+                 return render(request, 'home/login.html', {'error_message': 'mot de pass incorrecte'})
+
+        else:
+            return render(request, 'home/login.html', {'error_message': 'User does not exist'})
+           
+
+    return render(request, 'home/login.html')
+
+
+@login_required
+def profile(request):
+
+    return render(request,'home/profile.html')
+
+
+# views.py
+
+
+def is_manager(user):
+ 
+    return user.USER_ROLE_CHOICES== 'manager'
+
+#@user_passes_test(is_manager)
+
+def is_admin(user):
+ 
+    return user.USER_ROLE_CHOICES== 'admin'
+
+
 
 
 def file(request):
     context = {}
     file=File.objects.all()
     context['data']=file
-  
+
     return render(request,'import_file/file.html',context )
-
-
 
 def upload(request):
     context = {}
-  
+   
 
 
     if request.method == "GET":
@@ -56,7 +132,7 @@ def upload(request):
 
         
         
-        conn=psycopg2.connect(host='localhost',dbname='MS_db',user='postgres',password='123456789',port='5432')
+        conn=psycopg2.connect(host='localhost',dbname='1998_db',user='postgres',password='123456789',port='5432')
         import_ms_file(request,file,conn) 
         file=File.objects.all()
         context['data']=file       
@@ -66,34 +142,21 @@ def upload(request):
 
 
 
-
-
-
-
 def import_ms_file (request,file,conn):
     #read file pandas
-    connn=psycopg2.connect(host='localhost',dbname='MS_db',user='postgres',password='123456789',port='5432')
+    connn=psycopg2.connect(host='localhost',dbname='1998_db',user='postgres',password='123456789',port='5432')
     username = request.user
-    user ="thouraya"
-    print("thouuuuu")
-    print(username)
-    ll= File.objects.create(name=file,imported_by= username )
+    ll= File.objects.create(name=file, imported_by=username.username)
     ll.save()
     dc=pd.read_excel(file)
     f=dc
     filee=pd.DataFrame(f)
-    # Cela spécifie que vous souhaitez sélectionner toutes les lignes (:) de la colonne 'file_id'.
-
+    print( ll.id)
+    print( ll.id) 
+    print("///////////////////////////////" )
     filee.loc[:,'file_id']=ll.id
-    
-    # Using the StringIO method to set
-
-    # as file object
-    
     msfilee=io.StringIO()
-    #convert file to csv
     msfilee.write(filee.to_csv(index=None,header=None))
-    # This will make the cursor at index 0
     msfilee.seek(0)
     print(filee)
     print("///////////////////////////////")
@@ -106,8 +169,7 @@ def import_ms_file (request,file,conn):
             c.copy_from(
            
             file=msfilee,
-            #file name in DB
-            table= "home_filems",
+            table="home_filems",
             
             columns=[
        
@@ -198,9 +260,6 @@ def import_ms_file (request,file,conn):
             
     connn.commit()
     
-
-
-
 
 def delit  (request,id):
     context = {}
@@ -344,7 +403,7 @@ def getfilter(request,id):
 def equipe_list(request):
     equipes = EquipeMS.objects.all()
     return render(request,'EquipeMS/list_ms.html', {'equipes': equipes})
- 
+
 def equipe_create(request):
     if request.method == 'POST':
         name = request.POST['name']
@@ -393,7 +452,7 @@ def equipement_detail(request, id):
 
 
 
-
+#@user_passes_test(is_manager)
 def rule_list(request):
     rules = rute.objects.all()
     return render(request,'rules/list_rule.html', {'rules': rules})
@@ -949,3 +1008,73 @@ def chatbot(request):
         return redirect('chatbot')
     chat_history = ChatMessage.objects.all()
     return render(request, 'Chatbot/chat.html', {'chat_history': chat_history})
+
+
+
+
+
+
+def test (request,id):
+    context={}
+    N_case_modifier=0
+    nu_case=0
+    case_non_treter=0
+    
+   
+   
+    condi=lm.objects.filter(id_file=id)
+       
+    r=rute.objects.all
+
+    context['con']=condi
+    context['data']=0
+    context['id']=id
+    context['rute']=r
+   
+    
+   
+    if(request.POST['test']!="vide"):
+        field=request.POST['test']
+        
+        
+        c=condition.objects.all().filter(id_rute=field)
+        for i in c :
+            x=i.field
+            field_condition=str(x)
+            condition_condition=i.Con
+            c=resulta.objects.all().filter(id_condition=i)
+            for m in c :
+                    h=m.field
+                    field_res=str(h)
+                    condition_res=str(m.Res)
+                    w=FileMs.objects.filter(**{field_condition: condition_condition},file_id=id)                    
+                    for a in w :
+                         nu_case=nu_case+1
+                         h=FileMs.objects.filter(pk=a.pk).get()
+                         hh=FileMs.objects.filter(pk=a.pk).values_list(field_res,flat=True)
+                         filee=File.objects.filter(id=a.file_id).get()
+                         if((FileMs.objects.filter(**{field_condition: condition_condition},**{field_res: condition_res},pk=a.pk).count())>0):
+                           case_non_treter=case_non_treter+1
+                         else:
+                                 N_case_modifier=N_case_modifier+1  
+                         
+
+                     
+        context['case']=nu_case
+        if( nu_case == 0 ):
+           context['faux']=0
+           context['vrai']=100
+        else:
+             context['faux']=int((100*N_case_modifier)/nu_case)
+             context['vrai']=int((100*case_non_treter)/nu_case)
+                
+        context['m']=case_non_treter
+        context['n']=N_case_modifier
+        context['class']="alert-warning alert-dismissible fade show"
+        context['cas']=2
+    else:
+        context['message']="choix n'est pas choisis" 
+        context['class']="alert alert-danger"
+        context['cas']=1
+       
+    return render(request,'import_file/import.html',context )

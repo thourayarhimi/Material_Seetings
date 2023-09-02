@@ -258,11 +258,7 @@
                 <tbody>
 					{% for equipe in equipes %}
                     <tr>
-						<td>
-
-							{{ equipe.id }}
-							
-						</td>
+	
 						<td>{{ equipe.name }}</td>
 						<td>{{ equipe.email }}</td>
 
@@ -307,7 +303,7 @@
 				
 
 					<div class="modal-header">						
-						<h4 class="modal-title">Add Employee</h4>
+						<h4 class="modal-title">Add </h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
@@ -346,7 +342,7 @@
 				<form   action=" {% url 'update' equipe.id %}"  method="POST" >
 					{% csrf_token %}
 					<div class="modal-header">						
-						<h4 class="modal-title">Edit Employee</h4>
+						<h4 class="modal-title">Edit </h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
@@ -383,7 +379,7 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Delete Employee</h4>
+						<h4 class="modal-title">Delete </h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					

@@ -171,7 +171,7 @@ var doughnutChart = new Chart(doughnutChartCanvas, {
                               </button>
                             </div>
                             {% block zz %}
-                            <form method="post" action=""> 
+                            <form method="post" action="{% url 'test' id%}"> 
                                 {% csrf_token %}
                                 
                                

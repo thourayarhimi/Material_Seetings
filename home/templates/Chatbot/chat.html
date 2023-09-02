@@ -1,12 +1,107 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
+<link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
+<style>
+    #chat-container {
+        background-color: #f7f7f7;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .user-message, .bot-message {
+        padding: 10px 15px;
+        margin: 5px;
+        border-radius: 10px;
+    }
+
+    .user-message {
+        background-color: #007bff;
+        color: white;
+        align-self: flex-end;
+    }
+
+    .bot-message {
+        background-color: #f5f5f5;
+        color: #333;
+        align-self: flex-start;
+    }
+
+    #user-input {
+        width: 80%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    #send-button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    #clear-history-button {
+        color: #007bff;
+        text-decoration: none;
+        margin-top: 10px;
+        display: block;
+    }
+    .bot-message-container {
+        display: flex;
+        align-items: flex-start;
+    }
+
+    .bot-image {
+        width: 40px;
+        height:40px;
+        border-radius: 50%;
+        margin-right: 20px;
+    }
+    #chat-history {
+        max-height: 400px;
+        overflow-y: auto;
+    }
+    #chatbot-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        cursor: pointer;
+        z-index: 1000; /* Ensure the button appears above other content */
+    }
+    /* Initially hide the chat container */
+#chat-container {
+    display: none;
+}
+
+/* Show the chat container when the show-chat class is added */
+#chat-container.show-chat {
+    display: block;
+}
+
+</style>
 
 
-    
+
+<div class="col-md-7 grid-margin stretch-card">
+    <div class="card">
+     
+      <div class="card-body">
+        <p><h1>Hi! 👋 it's great to see you!</h1></p>
+
+        <div id="chatbot-button">
+            <img src="{% static 'assets/images/chatbot (2).png' %}" alt="Chatbot Icon">
+        </div>
     <div id="chat-container">
         <div id="chat-history">
+            
             {% for message in chat_history %}
+                  {% if not message.is_user %}
+                   <img src="{% static 'assets/images/chat.jpg' %}" alt="Bot" class="bot-image">
+                  {% endif %}
                 <p {% if message.is_user %}class="user-message"{% else %}class="bot-message"{% endif %}>
                     {{ message.text }}
                 </p>
@@ -15,18 +110,33 @@
         <form id="chat-form" method="post">
             {% csrf_token %}
             <input type="text" id="user-input" placeholder="Type your message here">
-            <button id="send-button" type="button">Send</button>
+            <button id="send-button" type="button"><i class='bx bx-send' ></i></button>
             <!-- chatbot.html -->
 
             <a href="{% url 'chatbot' %}?clear_history=true" id="clear-history-button">Supprimer l'historique</a>
 
         </form>
+
         
     </div>
 
+</div>
+</div>
+</div>
+
+
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        
         $(document).ready(function () {
+
+        
+                // Toggle chat conversation visibility
+                $('#chatbot-button').on('click', function () {
+                    $('#chat-container').toggleClass('show-chat');
+                });
+        
+
             $('#send-button').on('click', function () {
                 const userMessage = $('#user-input').val();
                 $('#chat-history').append(`<p class="user-message">${userMessage}</p>`);
@@ -59,4 +169,4 @@
 
 
 
-{% endblock %}
+    {%endblock content%}
