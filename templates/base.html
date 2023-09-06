@@ -58,9 +58,9 @@
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-cached me-2 text-success"></i> Activity Log </a>
+                  <i class="mdi mdi-cached me-2 text-success"></i> Admin </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{% url 'index'%}">
                   <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
               </div>
             </li>
@@ -144,7 +144,7 @@
               </a>
             </li>
           
-            {% if user.role == 'manager' %}
+          
              <!-- Show manager-specific content -->
 
             <li class="nav-item">
@@ -153,7 +153,7 @@
                 <i class="mdi mdi-chart-bar menu-icon"></i>
               </a>
             </li>
-            {% endif %}
+           
 
             
             <li class="nav-item sidebar-actions">

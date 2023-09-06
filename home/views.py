@@ -83,6 +83,15 @@ def custom_login(request):
     return render(request, 'home/login.html')
 
 
+from django.contrib.auth import logout
+from django.shortcuts import redirect 
+
+def logout_view(request):
+    logout(request)
+    return redirect('home/index.html')
+
+
+
 @login_required
 def profile(request):
 
@@ -553,11 +562,28 @@ def conditionn(request,id):
 
 def delete_condution(request, pk):
     delet_con = get_object_or_404(condition, pk=pk)
+    context = {}
     if request.method == 'POST':
         delet_con.delete()
-        return redirect('Condition' )
+        cc=condition.objects.filter(id_rute=delet_con.id_rute)
+        context['data']=cc
+        return render(request,'condition/condition.html',context)
     return render(request, 'condition/condition.html', {' delet_con': delet_con})
 
+
+def update_rule(request, condition_id):
+    context = {}
+    field=request.POST['field']
+    con=request.POST['con']
+    cond_obj = get_object_or_404(condition, pk=condition_id)
+    cond_obj.field=field
+    cond_obj.con=con
+    cond_obj.save()
+    
+    cc=condition.objects.filter(id_rute=cond_obj.id_rute)
+    context['data']=cc
+    return render(request,'condition/condition.html',context)
+    
 # UPDATE CONDUTION 
 
 
