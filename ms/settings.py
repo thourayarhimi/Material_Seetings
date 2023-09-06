@@ -13,9 +13,9 @@ from django.shortcuts import render
 
 from pathlib import Path
 import os
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -27,7 +27,6 @@ SECRET_KEY = 'django-insecure-5-ixvl16xac8vvm196ix!8td^#cg2o=2)_ew!b_6m_a*dtifoq
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -59,7 +58,7 @@ ROOT_URLCONF = 'ms.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [(os.path.join(BASE_DIR,('templates')))],
+        'DIRS': [(os.path.join(BASE_DIR, ('templates')))],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -75,22 +74,27 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'ms.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     'default': {
-       'ENGINE': 'django.db.backends.postgresql',
-       'NAME': '1998_db',
-       'USER': 'postgres',
-       'PASSWORD': '123456789',
-       'HOST': 'localhost',
-       'PORT': '5432',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': '1998_db',
+        'USER': 'postgres',
+        'PASSWORD': '123456789',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'db', # This is where you put the name of the db file.
+#                  # If one doesn't exist, it will be created at migration time.
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -109,7 +113,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -121,21 +124,18 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-IMPORT_EXPORT_USE_TRANSACTIONS=True
-
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 STATIC_URL = 'static/'
-MEDIA_URL  ='images/'
-STATICFILES_DIRS=[ 
+MEDIA_URL = 'images/'
+STATICFILES_DIRS = [
     BASE_DIR / "static"
-    ]
-STATIC_ROOT=BASE_DIR/'staticfiles'
-MEDIA_ROOT=BASE_DIR/'images'
-
+]
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+MEDIA_ROOT = BASE_DIR / 'images'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
