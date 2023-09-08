@@ -11,7 +11,7 @@ urlpatterns = [
     path('', views.home,name='index'),
     path('register', views.register,name='home'),
     path('log/', views.custom_login, name='log'),
-   
+    
    
     path('profile/', views.profile, name='profile'),
     path('file/', views.file,name='file'),
@@ -33,6 +33,7 @@ urlpatterns = [
     
     path('condition/<int:id>/', views.conditionn,name='condition'),
     path('condution/<int:pk>/delete/', views.delete_condution, name='delete_condutionn'),
+    path('updatecond/<int:pk>/delete/', views.update_cond, name='update_cond'),
     
     path('resultat', views.resultas_all,name='resulta'),
     path('result_list', views.resultas_List,name='resultas_List'),

@@ -252,7 +252,9 @@
                     <th> ID </th>
                     <th> field</th>
                     <th> case </th>
+					  {% if user.role != 'user' %}
                     <th> Action </th>
+					{% endif %}
                   </tr>
               </thead>
               <tbody>
@@ -263,12 +265,13 @@
                   <td>{{x.field}}</td>
                   <td class=""> {{x.Res}} </td>
 
-                     
+				  {% if user.role != 'user' %}
                       <td>
                           <a href="" ><i class="material-icons" data-toggle="tooltip" title="Edit" style="color:#ffd600  " >&#xE254;</i></a>
                           <a href="#deleteEmployeeModal-{{ forloop.counter }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
 
                       </td>
+					  {% endif %}
                   </tr>
         {% empty %}
         <tr>

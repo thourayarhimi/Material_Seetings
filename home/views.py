@@ -52,7 +52,13 @@ def register(request):
         password = request.POST['password']
         username = request.POST['username']
         role = request.POST['role']
-        CustomUser.objects.create_user(email=email, username=username, password=password, role=role)
+        if request.POST['role'] == "admin":
+            is_staff = True
+            is_superuser = True
+        else:
+            is_staff = False
+            is_superuser = False
+        CustomUser.objects.create_user(email=email, username=username, password=password, role=role, is_staff=is_staff, is_superuser=is_superuser)
 
         return redirect('log')
     return render(request, 'home/register.html')
@@ -571,7 +577,7 @@ def delete_condution(request, pk):
     return render(request, 'condition/condition.html', {' delet_con': delet_con})
 
 
-def update_rule(request, condition_id):
+def update_cond(request, condition_id):
     context = {}
     field=request.POST['field']
     con=request.POST['con']
@@ -1104,3 +1110,18 @@ def test (request,id):
         context['cas']=1
        
     return render(request,'import_file/import.html',context )
+
+
+from django.shortcuts import render
+from .models import CustomUser
+
+def count_users_by_role(request):
+    user_count = CustomUser.objects.filter(role='user').count()
+    manager_count = CustomUser.objects.filter(role='manager').count()
+    admin_count = CustomUser.objects.filter(role='admin').count()
+    
+    return render(request, 'home/profile.html', {
+        'user_count': user_count,
+        'manager_count': manager_count,
+        'admin_count': admin_count,
+    })

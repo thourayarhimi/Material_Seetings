@@ -148,51 +148,7 @@
 
 
 
-          <div class="col-lg-12 grid-margin stretch-card">
-            <div class="card">
-              <div class="card-body">
-
-                <table class="table table-hover table-fixed">
-                  <thead>
-                    <tr>
-                      <th> ID </th>
-                      <th> field</th>
-                      <th> case </th>
-                      <th> Action </th>
-                      <th> Resultat </th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {%for x in data %}
-                    <tr>
-                      <td>{{x.pk}}</td>
-                      <td>{{x.field}}</td>
-                      <td class=""> {{x.Con}} </td>
-                      <td class=""> 
-                        <form action="{% url 'delete_condutionn'  x.pk %}" method="post" style="display: inline;">
-                          {% csrf_token %}
-                          <input type="submit" value="Delete">  
-                        </form>
-                        
-                        <a href="{% url 'update_cond' x.pk %}"><i class="material-icons" data-toggle="tooltip" title="Edit" style="color:#ffd600  ">&#xE254;</i></a>
-                      </td>
-                      <td class="col-lg-3"> <a href="{% url 'resultat' x.id %}" >  <i class="material-icons" data-toggle="tooltip" title="Add" style="color:#303f9f ">&#xe148;</i>ADD resultat</a></td>
-
-
-                      
-                      
-
-                    
-                    
-                  </tr>
-                    </tr>
-                    {%endfor %}
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+          
          
         </div>
       </div>
