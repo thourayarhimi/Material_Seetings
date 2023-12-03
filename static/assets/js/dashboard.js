@@ -218,10 +218,10 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
+            labels: [],
             datasets: [
               {
-                label: "CHN",
+                label: "USER",
                 borderColor: gradientStrokeViolet,
                 backgroundColor: gradientStrokeViolet,
                 hoverBackgroundColor: gradientStrokeViolet,
@@ -230,10 +230,10 @@
                 fill: false,
                 borderWidth: 1,
                 fill: 'origin',
-                data: [20, 40, 15, 35, 25, 50, 30, 20]
+                data: [10]
               },
               {
-                label: "USA",
+                label: "Admin",
                 borderColor: gradientStrokeRed,
                 backgroundColor: gradientStrokeRed,
                 hoverBackgroundColor: gradientStrokeRed,
@@ -242,10 +242,11 @@
                 fill: false,
                 borderWidth: 1,
                 fill: 'origin',
-                data: [40, 30, 20, 10, 50, 15, 35, 40]
+                  
+                data: [ 1  ]
               },
               {
-                label: "UK",
+                label: "Manager",
                 borderColor: gradientStrokeBlue,
                 backgroundColor: gradientStrokeBlue,
                 hoverBackgroundColor: gradientStrokeBlue,
@@ -254,7 +255,8 @@
                 fill: false,
                 borderWidth: 1,
                 fill: 'origin',
-                data: [70, 10, 30, 40, 25, 50, 15, 30]
+                //sjjjjqcvhsdbjchbdshbvjhdsbvhdsbvkjdskvjdkjvnkjdsnkjdsnkvjndskjvndskjbqdfbjkdsbnkjvdsbkijdsbsqdjnbkjdsbkjsvdkjsvkjsdkjbkvjdsbvjdks
+                data: []
               }
           ]
         },
@@ -337,7 +339,7 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG'],
+            labels: [],
             datasets: [
               {
                 label: "CHN",

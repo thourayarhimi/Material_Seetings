@@ -89,7 +89,7 @@ class CustomUserPermissions(models.Model):
 # BasedModel
 
 class BaseModel(models.Model):
-    date = models.DateTimeField(auto_now=False, auto_now_add=True)
+    imported_at = models.DateTimeField(auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True, null=True)
 
     imported_by = models.CharField(max_length=50, default=' Rhimi Thouraya')
@@ -102,53 +102,11 @@ class BaseModel(models.Model):
         abstract = True
 
 
-# creating a custom model manager to apply the filter
-
-# automatically without using filter(is_delete=False)
 
 
-# SoftDeleteManager
-
-class SoftDeleteManager(models.Manager):
-
-    def get_queryset(self):
-        return super().get_queryset().filter(is_deleted=False)
 
 
-# SoftDeleteModel
-
-class SoftDeleteModel(models.Model):
-    is_deleted = models.BooleanField(null=False, default=False)
-
-    deleted_by = models.CharField(max_length=30, null=True)
-
-    deleted_at = models.DateTimeField(auto_now_add=True, null=True)
-
-    restored_at = models.DateTimeField(auto_now=True, null=True)
-
-    restored_by = models.CharField(max_length=30, default='Thouraya Rhimi  ', null=True)
-
-    objects = models.Manager()
-
-    undeleted_objects = SoftDeleteManager()
-
-    def soft_delete(self):
-        self.is_deleted = True
-
-        self.save()
-
-    def restore(self):
-        self.is_deleted = False
-
-        self.save()
-
-    class Meta:
-        # Django will not create a database table for this model
-
-        abstract = True
-
-
-class File(models.Model):
+class File(BaseModel , models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, null=False, blank=True)
     imported_by = models.CharField(max_length=50, null=True, blank=True)
@@ -237,20 +195,20 @@ class FileMs(models.Model):
         return self.article
 
 
-class rute(BaseModel, SoftDeleteModel, models.Model):
+class rute(BaseModel ,  models.Model):
     name = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.name
 
 
-class condition(models.Model):
+class condition(BaseModel , models.Model):
     field = models.CharField(max_length=50, null=True, blank=True)
     Con = models.CharField(max_length=50, null=True, blank=True)
     id_rute = models.ForeignKey(rute, on_delete=models.CASCADE)
 
 
-class resulta(models.Model):
+class resulta(BaseModel , models.Model):
     field = models.CharField(max_length=50, null=True, blank=True)
     Res = models.CharField(max_length=50, null=True, blank=True)
     id_condition = models.ForeignKey(condition, on_delete=models.CASCADE)
@@ -274,7 +232,7 @@ class EquipeMS(models.Model):
         return self.name
 
 
-class ChatMessage(models.Model):
+class ChatMessage(BaseModel,models.Model):
     text = models.TextField()
     is_user = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

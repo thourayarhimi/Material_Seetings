@@ -100,8 +100,20 @@ def logout_view(request):
 
 @login_required
 def profile(request):
-
-    return render(request,'home/profile.html')
+    context={}
+    x= CustomUser.objects.filter(role="user").all()
+    print(x[1].date_joined.month)
+    context["i"]=x.count()
+    
+        
+    
+    
+    y= CustomUser.objects.filter(role="manager").all()
+    context["j"]=y.count()
+    z= CustomUser.objects.filter(role="admin").all()
+    context["k"]=z.count()
+    
+    return render(request,'home/profile.html',context)
 
 
 # views.py
@@ -130,23 +142,12 @@ def file(request):
 def upload(request):
     context = {}
    
-
-
     if request.method == "GET":
-
-        
         return render(request , 'import_file/upload_file.html', context)
-    
     
     if request.method== 'POST':
         
         file=request.FILES['my_file']
-        
-
-
-
-        
-        
         conn=psycopg2.connect(host='localhost',dbname='1998_db',user='postgres',password='123456789',port='5432')
         import_ms_file(request,file,conn) 
         file=File.objects.all()
@@ -160,10 +161,28 @@ def upload(request):
 def import_ms_file (request,file,conn):
     #read file pandas
     connn=psycopg2.connect(host='localhost',dbname='1998_db',user='postgres',password='123456789',port='5432')
+    
+    # Check the file extension
+    file_extension = file.name.split('.')[-1].lower()
+
+    if file_extension == 'xls':
+        # Excel file
+        dc = pd.read_excel(file, engine='openpyxl')
+    elif file_extension == 'xlsx':
+        # Excel file
+        dc = pd.read_excel(file, engine='openpyxl')
+    elif file_extension == 'csv':
+        # CSV file
+        dc = pd.read_csv(file)
+    else:
+        # Handle other file formats as needed
+        raise ValueError(f"Unsupported file format: {file_extension}")
+
+   
     username = request.user
     ll= File.objects.create(name=file, imported_by=username.username)
     ll.save()
-    dc=pd.read_excel(file)
+    
     f=dc
     filee=pd.DataFrame(f)
     print( ll.id)
@@ -259,20 +278,10 @@ def import_ms_file (request,file,conn):
        'Taille_de_lot_du_CCR',
        'uq7',
        'file_id'
-       
-       
-
         ],
         null="",
         sep=",",
-        
-        
-
         ),
-    
-            
-             
-            
     connn.commit()
     
 
@@ -563,6 +572,7 @@ def conditionn(request,id):
         field=request.POST['choix']
         co=request.POST['condition']
         c=condition.objects.create(field=field,Con=co,id_rute=r)
+
         c.save()
     return render(request,'condition/condition.html',context )
 

@@ -169,6 +169,7 @@
                       <td>{{x.pk}}</td>
                       <td>{{x.field}}</td>
                       <td class=""> {{x.Con}} </td>
+                      
                       <td class=""> 
                         <form action="{% url 'delete_condutionn'  x.pk %}" method="post" style="display: inline;">
                           {% csrf_token %}
