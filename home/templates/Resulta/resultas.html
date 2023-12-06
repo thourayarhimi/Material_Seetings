@@ -30,7 +30,7 @@
           
 
       {% block jj %}
-      <form method="post" enctype=""> 
+      <form method="post" enctype=""  onsubmit="return validateForm();"> 
           {% csrf_token %}
           
          
@@ -133,6 +133,22 @@
             </div>
           {% endblock %}
       </form>
+      
+      <script>
+        function validateForm() {
+            var choix = document.getElementById('inputState').value;
+            var condition = document.getElementById('rute').value;
+    
+            if (choix === 'Choose...' || condition.trim() === '') {
+                window.alert('Please fill in all fields');
+                return false;
+            }
+    
+            // Add additional validation if needed
+    
+            return true;
+        }
+    </script>
       
 
 

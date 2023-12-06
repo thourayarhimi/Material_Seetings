@@ -138,7 +138,7 @@ def file(request):
     context['data']=file
 
     return render(request,'import_file/file.html',context )
-
+from django.contrib import messages
 def upload(request):
     context = {}
    
@@ -146,12 +146,21 @@ def upload(request):
         return render(request , 'import_file/upload_file.html', context)
     
     if request.method== 'POST':
-        
-        file=request.FILES['my_file']
-        conn=psycopg2.connect(host='localhost',dbname='1998_db',user='postgres',password='123456789',port='5432')
-        import_ms_file(request,file,conn) 
-        file=File.objects.all()
-        context['data']=file       
+        try:
+            file=request.FILES['my_file']
+            conn=psycopg2.connect(host='localhost',dbname='1998_db',user='postgres',password='123456789',port='5432')
+            import_ms_file(request,file,conn) 
+            # Add success message
+            messages.success(request, 'File imported successfully!')
+
+             # Fetch the updated file data
+            file=File.objects.all()
+            context['data']=file 
+        except Exception as e:
+              # Add error message
+              messages.error(request, 'Error importing file')  
+              # Return to the upload form without further processing
+              return render(request, 'import_file/upload_file.html', context)    
        
     return render(request , 'import_file/file.html' , context)
 
@@ -491,7 +500,6 @@ def rule_detail(request, pk):
     return render(request, 'rules/rule_detail.html', {'rule': rule})
 
 
-
 def rule_create(request):
     if request.method == 'POST':
         form = RuleForm(request.POST)
@@ -511,7 +519,7 @@ def rule_create(request):
 
 from django.contrib.auth.decorators import login_required
 
-@login_required
+
 def rule_update(request, pk):
     rule = get_object_or_404(rute, pk=pk)
     
@@ -562,6 +570,8 @@ def Condition(request):
 
     return render(request,'condition/condition.html' ,context )
 
+
+from django.contrib import messages
 def conditionn(request,id):
     context = {}
     r=rute.objects.filter(id=id).get()
@@ -571,9 +581,16 @@ def conditionn(request,id):
     if request.method== 'POST':
         field=request.POST['choix']
         co=request.POST['condition']
-        c=condition.objects.create(field=field,Con=co,id_rute=r)
+        # Vérifier si les champs ne sont pas vides
+        if not field or not co:
+            messages.error(request, 'Veuillez remplir tous les champs.')
+            
+        else: 
+             
+            c=condition.objects.create(field=field,Con=co,id_rute=r)
 
-        c.save()
+            c.save()
+            messages.success(request, 'Condition ajoutée avec succès.')
     return render(request,'condition/condition.html',context )
 
 def delete_condution(request, pk):
@@ -613,6 +630,9 @@ def resultas_all (request):
     context['data']=cc
     return render(request,'Resulta/resultas.html' ,context )
 
+
+
+
 def resulta_id(request,id):
     context = {}
    
@@ -625,8 +645,10 @@ def resulta_id(request,id):
     if request.method== 'POST':
         field=request.POST['choix']
         co=request.POST['condition']
+       
         c=resulta.objects.create(field=field,Res=co,id_condition=r)
         c.save()
+           
     return render(request,'Resulta/resultas.html' ,context )
 
 

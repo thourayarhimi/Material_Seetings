@@ -229,6 +229,8 @@
   </style>
 
   
+<!-- Div pour afficher le message d'alerte -->
+<div id="alertMessage" class="alert alert-danger" style="display: none;"></div>
 
     <div class="container">
         <div class="table-wrapper">
@@ -246,11 +248,11 @@
 
 
 
-                  <form  method="post">
+                  <form  method="post" id="ruleForm" >
                     {% csrf_token %}
                     {{ form.as_p }}
                     
-                    <button type="submit" class="btn btn-outline-success">   Save    </button>
+                    <button type="submit" class="btn btn-outline-success" onclick="validateForm()">   Save    </button>
                     <button type="button" class="btn btn-outline-primary"><a href="{% url 'rule_list' %}">Cancel</a></button>
                   </form>
 
@@ -270,6 +272,33 @@
   
   </div>
 </div>
+
+<script>
+    function validateForm() {
+        var form = document.getElementById('ruleForm');
+        var elements = form.elements;
+        var alertMessageDiv = document.getElementById('alertMessage');
+
+        for (var i = 0; i < elements.length; i++) {
+            if (elements[i].type !== 'submit' && elements[i].type !== 'button') {
+                if (elements[i].value.trim() === '') {
+                    // Afficher le message dans la div
+                    alertMessageDiv.innerHTML = 'Veuillez remplir tous les champs du formulaire.';
+                    alertMessageDiv.style.display = 'block';
+                    
+                    // Empêcher la soumission du formulaire en cas de champ vide
+                    event.preventDefault();
+                    return;
+                }
+            }
+        }
+
+        // Si tous les champs sont remplis, masquer la div et soumettre le formulaire
+        alertMessageDiv.style.display = 'none';
+        form.submit();
+    }
+</script>
+
 
 
 {%endblock content%}
