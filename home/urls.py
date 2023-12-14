@@ -56,6 +56,15 @@ urlpatterns = [
     
     path('chatbot/',views.chatbot, name='chatbot'),
     path('test<int:id>', views.test,name='test'),
+    
+    path('forgot-password/', views.forgot_password, name='forgot_password'),
+    
+    
+    
+    path('chatbottt2/', views.chatbottt2, name='chatbottt2'),
+    path('clear_chat_history/',views.clear_chat_history, name='clear_chat_history'),
+    
+    path('statistique/', views.statistique, name='statistique'),
 
 
 

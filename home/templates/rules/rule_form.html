@@ -237,7 +237,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-                      <h2 class="card-title" >{% if form.instance.pk %}Edit<b> Rule</b>{% else %}Create<b> Rule</b>{% endif %}</h2>
+                      <h2 class="card-title" >{% if form.instance.pk %}Modifier la<b> règle</b>{% else %}Créer une<b> règle</b>{% endif %}</h2>
 					          </div>
 					          <div class="col-sm-6"> </div>
                 </div>
@@ -252,8 +252,8 @@
                     {% csrf_token %}
                     {{ form.as_p }}
                     
-                    <button type="submit" class="btn btn-outline-success" onclick="validateForm()">   Save    </button>
-                    <button type="button" class="btn btn-outline-primary"><a href="{% url 'rule_list' %}">Cancel</a></button>
+                    <button type="submit" class="btn btn-outline-success" onclick="validateForm()">   Sauvegarder   </button>
+                    <button type="button" class="btn btn-outline-primary"><a href="{% url 'rule_list' %}">Annuler</a></button>
                   </form>
 
                   <div class="clearfix">

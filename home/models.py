@@ -8,7 +8,7 @@ from django.contrib.auth.base_user import BaseUserManager
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import gettext_lazy as _
-
+from django.db.models import Count
 
 # Create your models here.
 class CustomUserManager(BaseUserManager):
@@ -195,17 +195,50 @@ class FileMs(models.Model):
         return self.article
 
 
-class rute(BaseModel ,  models.Model):
+class rute(models.Model):
     name = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return self.name
+    
+    def get_conditions_count(self):
+        # Retourne le nombre de conditions associées à cette route
+        return self.condition_set.count()
+
+    def get_results_count(self):
+        # Retourne le nombre de résultats associés à cette route
+        return self.condition_set.aggregate(results_count=Count('resulta'))['results_count']
+    
+    @classmethod
+    def top_three_rules_by_conditions(cls):
+        # Utilisez la méthode annotate pour ajouter le nombre de conditions à chaque règle
+        # et récupérez les trois premières règles
+        top_three_rules = cls.objects.annotate(num_conditions=Count('condition')).order_by('-num_conditions')[:3]
+        return top_three_rules
+    
+    @classmethod
+    def all_rules_by_conditions(cls):
+        # Utilisez la méthode annotate pour ajouter le nombre de conditions à chaque règle
+        # et récupérez toutes les règles triées par le nombre de conditions
+        all_rules = cls.objects.annotate(num_conditions=Count('condition')).order_by('-num_conditions')
+        return all_rules
 
 
-class condition(BaseModel , models.Model):
+class condition(models.Model):
     field = models.CharField(max_length=50, null=True, blank=True)
     Con = models.CharField(max_length=50, null=True, blank=True)
     id_rute = models.ForeignKey(rute, on_delete=models.CASCADE)
+
+    def get_resultas_count(self):
+       # Retourne le nombre de resultat associées à cette condition
+       return self.resulta_set.count()
+    
+    @classmethod
+    def conditions_with_results(cls):
+        # Utilisez la méthode annotate pour ajouter le nombre total de résultats à chaque condition
+        # et récupérez toutes les conditions triées par le nombre total de résultats
+        conditions_with_results = cls.objects.annotate(num_results=Count('resulta')).filter(num_results__gt=0).order_by('-num_results')
+        return conditions_with_results
 
 
 class resulta(BaseModel , models.Model):

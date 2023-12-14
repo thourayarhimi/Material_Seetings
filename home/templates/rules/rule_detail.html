@@ -235,7 +235,7 @@
             <div class="table-title">
                 <div class="row">
                     <div class="col-sm-6">
-						<h2>Rule <b>Details</b></h2>
+						<h2><b>Détails de la règle</b></h2>
 					</div>
 					<div class="col-sm-6">
 						
@@ -245,12 +245,12 @@
                 </div>
             </div>
 
-            <p><strong>Rule Name:</strong> {{ rule.name }}</p>
+            <p><strong>Nom de la règle :</strong> {{ rule.name }}</p>
 
 
-          <p><strong>Updated By:</strong> {{ rule.updated_by }}</p>
+          <p><strong>Mis à jour par:</strong> {{ rule.updated_by }}</p>
 
-          <p><strong>Updated At:</strong> {{ rule.updated_at }}</p>
+          <p><strong>Mis à jour à :</strong> {{ rule.updated_at }}</p>
 
           <p>
             <a href="{% url 'rule_update' pk=rule.pk %}"><i class="material-icons" data-toggle="tooltip" title="Edit" style="color:#ffd600  ">&#xE254;</i></a>
@@ -293,16 +293,16 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Delete </h4>
+						<h4 class="modal-title">Supprimer </h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>Are you sure you want to delete these Records?</p>
-						<p class="text-warning"><small>are you  information Delete</small></p>
+						<p>Êtes-vous sûr de vouloir supprimer ces enregistrements ?</p>
+						<p class="text-warning"><small>êtes-vous des informations Supprimer</small></p>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<a href="{% url 'rule_delete' pk=rule.pk %}" type="submit" class="btn btn-danger">Delete</a>
+						<a href="{% url 'rule_delete' pk=rule.pk %}" type="submit" class="btn btn-danger">Supprimer</a>
 					</div>
 				</form>
 			</div>

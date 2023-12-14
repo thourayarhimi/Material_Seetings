@@ -104,9 +104,7 @@ def profile(request):
     x= CustomUser.objects.filter(role="user").all()
     print(x[1].date_joined.month)
     context["i"]=x.count()
-    
-        
-    
+   
     
     y= CustomUser.objects.filter(role="manager").all()
     context["j"]=y.count()
@@ -171,7 +169,7 @@ def import_ms_file (request,file,conn):
     #read file pandas
     connn=psycopg2.connect(host='localhost',dbname='1998_db',user='postgres',password='123456789',port='5432')
     
-    # Check the file extension
+  
     file_extension = file.name.split('.')[-1].lower()
 
     if file_extension == 'xls':
@@ -581,16 +579,8 @@ def conditionn(request,id):
     if request.method== 'POST':
         field=request.POST['choix']
         co=request.POST['condition']
-        # Vérifier si les champs ne sont pas vides
-        if not field or not co:
-            messages.error(request, 'Veuillez remplir tous les champs.')
-            
-        else: 
-             
-            c=condition.objects.create(field=field,Con=co,id_rute=r)
-
-            c.save()
-            messages.success(request, 'Condition ajoutée avec succès.')
+        c=condition.objects.create(field=field,Con=co,id_rute=r)
+        c.save()
     return render(request,'condition/condition.html',context )
 
 def delete_condution(request, pk):
@@ -1157,3 +1147,175 @@ def count_users_by_role(request):
         'manager_count': manager_count,
         'admin_count': admin_count,
     })
+
+
+def forgot_password(request):
+    error = False
+    success = False
+    message = ""
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        user = User.objects.filter(email=email).first()
+        if user:
+            print("processing forgot password")
+            html = """
+                <p> Hello, merci de cliquer pour modifier votre email </p>
+            """
+
+            msg = EmailMessage(
+                "Modification de mot de pass!",
+                html,
+                "soroib0879@gmail.com",
+                ["soro4827@gmail.com"],
+            )
+
+            msg.content_subtype = 'html'
+            msg.send()
+            
+            message = "processing forgot password"
+            success = True
+        else:
+            print("user does not exist")
+            error = True
+            message = "user does not exist"
+    
+    context = {
+        'success': success,
+        'error':error,
+        'message':message
+    }
+    return render(request, 'home/forgot_password.html', context) 
+
+
+
+
+# ia chat bot  Dans votre fichier views.py
+from django.shortcuts import render, redirect
+import openai
+
+# Modifiez votre modèle de chat pour utiliser 'sender' et 'text' au lieu de 'is_user' et 'text'
+class ChatMessage1:
+    def __init__(self, sender, text):
+        self.sender = sender
+        self.text = text
+
+def chatbottt2(request):
+    if 'chat_history' not in request.session:
+        request.session['chat_history'] = []
+
+    if request.method == 'POST':
+        user_input = request.POST.get('user_input')
+
+        # Vérifiez si le message de l'utilisateur contient des règles spécifiques
+        if 'regle latecoere' in user_input.lower():
+            # Réponse prédéfinie pour les messages contenant 'regles'
+            bot_response = "Voici les règles du chat : [insérez vos règles ici]"
+        elif 'condition' in user_input.lower():
+            # Réponse prédéfinie pour les messages contenant 'condition'
+            bot_response = "Voici les conditions du chat : [insérez vos conditions ici]"
+        elif 'resultat' in user_input.lower():
+            # Réponse prédéfinie pour les messages contenant 'resultat'
+            bot_response = "Voici les résultats du chat : [insérez vos résultats ici]"
+        elif 'resultats et conditions' in user_input.lower():
+            # Réponse prédéfinie pour les messages contenant 'resultat'
+            bot_response = "Voici les resultats et conditions ndkjsnjnincjsdanjnoasndcnjn"
+        elif 'fichier' in user_input.lower():
+            # Réponse prédéfinie pour les messages contenant 'resultat'
+            bot_response = "Voici les fichier .... "
+        else:
+            # Utilisez votre clé API GPT-3
+            openai.api_key = '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' 
+            #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
+            
+            try:
+                # Effectuez une requête à l'API GPT-3
+                response = openai.Completion.create(
+                    engine="text-curie-001", # text-davinci:003 __
+                    prompt=user_input,
+                    max_tokens=1500
+                )
+                bot_response = response['choices'][0]['text']
+
+            except openai.error.RateLimitError as e:
+                # Gérer l'erreur de dépassement de quota
+                error_message = "Vous avez dépassé votre quota. Veuillez vérifier votre plan et vos détails de facturation."
+                return render(request, 'Chatbot/chatbot.html', {'user_input': user_input, 'response': error_message})
+            except openai.error.OpenAIError as e:
+                # Gérer d'autres erreurs OpenAI
+                error_message = "Une erreur s'est produite lors de la communication avec l'API GPT-3."
+                return render(request, 'Chatbot/chatbot.html', {'user_input': user_input, 'response': error_message})
+
+        # Ajoutez le message de l'utilisateur et la réponse du chatbot à l'historique dans la session
+        request.session['chat_history'].append({'sender': 'user', 'text': user_input})
+        request.session['chat_history'].append({'sender': 'bot', 'text': bot_response})
+
+        # Sauvegardez la session
+        request.session.modified = True
+
+    # Récupérez la liste des messages de la session au chargement initial
+    chat_history = request.session.get('chat_history', [])
+    return render(request, 'Chatbot/chatbot.html', {'chat_history': chat_history})
+
+
+def clear_chat_history(request):
+    if request.method == 'GET':
+        # Supprimez l'historique du chat de la session
+        if 'chat_history' in request.session:
+            del request.session['chat_history']
+    # Redirigez vers la vue qui affiche le chat ou une autre vue appropriée
+    return redirect('chatbottt2')  # Assurez-vous que 'chatbottt2' est correctement défini dans vos URL
+
+
+
+########## statistique ##########
+
+def statistique(request):
+    total_rules = rute.objects.count()
+    total_conditions = condition.objects.count()
+    total_resultats = resulta.objects.count()
+    total_users = CustomUser.objects.count()
+    user_count = CustomUser.objects.filter(role='user').count()
+    manager_count = CustomUser.objects.filter(role='manager').count()
+    admin_count = CustomUser.objects.filter(role='admin').count()
+
+    all_rules = rute.all_rules_by_conditions()
+    all_conditions_with_results = condition.conditions_with_results()
+
+    chart_data_rules = {
+        'categories': [rule.name for rule in all_rules],
+        'data': [rule.get_conditions_count() for rule in all_rules],
+    }
+
+    chart_data_conditions = {
+        'categories': [condition.Con for condition in all_conditions_with_results],
+        'data': [condition.get_resultas_count() for condition in all_conditions_with_results],
+    }
+    context = {
+        'total_rules': total_rules,
+        'total_conditions': total_conditions,
+        'total_resultats': total_resultats,
+        'total_users': total_users,
+        'user_count': user_count,
+        'manager_count': manager_count,
+        'admin_count': admin_count,
+        'chart_data_rules': chart_data_rules,
+        'chart_data_conditions': chart_data_conditions,        
+    }
+    return render(request, 'home/profile.html', context)
+
+def profile(request):
+    context={}
+    x= CustomUser.objects.filter(role="user").all()
+    print(x[1].date_joined.month)
+    context["i"]=x.count()
+   
+    
+    y= CustomUser.objects.filter(role="manager").all()
+    context["j"]=y.count()
+    z= CustomUser.objects.filter(role="admin").all()
+    context["k"]=z.count()
+    
+    
+    statistique(request)
+    
+    return render(request,'home/profile.html',context)

@@ -308,11 +308,11 @@ body {
     <div class="table-wrapper">
         <div class="table-title">
             <div class="row">
-                    <div class="col-sm-6">
-                         <h2>Liste <b>File</b></h2>
+                    <div class="col-sm-6"> 
+                         <h2>Liste de <b>Fichiers</b></h2>
                    </div>
                         <div class="col-sm-6">
-                            <a href=" {% url 'upload'%}" ><button class="btn btn-outline-success btn-icon-text"type="button">+ Import fichier</button></a>
+                            <a href=" {% url 'upload'%}" ><button class="btn btn-outline-success btn-icon-text"type="button">importer un fichier</button></a>
                         </div>
          </div>
      </div>
@@ -326,10 +326,10 @@ body {
                 <tr>
                 
                     <th scope="col">ID</th>
-                    <th scope="col">File Name</th>
-                    <th scope="col">Date Of Import</th>
-                    <th scope="col">Imported By</th>
-                    <th scope="col"> action</th>
+                    <th scope="col">Nom de fichier</th>
+                    <th scope="col">Date d'importation</th>
+                    <th scope="col">Importé par</th>
+                    <th scope="col">Action</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -349,7 +349,7 @@ body {
                                     " style="color:#d50000  "></i></a>
                                 
                                 <a href="{% url 'table' x.id   %}" ><button class="btn btn-outline-primary btn-fw"type="button">inspecter</button></a>
-                                <a href="{% url 'filter' x.id %}"><button class="btn btn-outline-primary btn-fw"type="button">Apply filter</button></a>
+                                <a href="{% url 'filter' x.id %}"><button class="btn btn-outline-primary btn-fw"type="button">Appliquer le filtre</button></a>
                                 
                             </div> 
                          </td>
@@ -362,20 +362,20 @@ body {
                                                 <div class="icon-box">
                                                     <i class="material-icons">&#xE5CD;</i>
                                                 </div>				
-                                                <h4 class="modal-title">Are you sure?</h4>	
+                                                <h4 class="modal-title">Es-tu sûr?</h4>	
                                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                             </div>
                                             <div class="modal-body">
-                                                <p>Do you really want to delete <br>
+                                                <p>Voulez-vous vraiment supprimer <br>
                                                     "{{x.name }}" ? <br>
-                                                    This process cannot be undone.</p>
+                                                    Ce processus ne peut pas être annulé.</p>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="{% url 'file' %}"class="btn btn-info" data-dismiss="modal">Cancel</a>
+                                                <a href="{% url 'file' %}"class="btn btn-info" data-dismiss="modal">Annuler</a>
                                             
                                                 
                                                 
-                                                    <a href="{% url 'delit' x.id %}" class="btn btn-danger"onlick=PopUp()>Delete</a>
+                                                    <a href="{% url 'delit' x.id %}" class="btn btn-danger"onlick=PopUp()>Supprimer</a>
                                                 
                                             </div>
                                         </div>

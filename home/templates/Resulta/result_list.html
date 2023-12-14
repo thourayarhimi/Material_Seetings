@@ -236,7 +236,7 @@
                     <div class="col-sm-6">
                     
                     
-                      <h2>List des <b>Resulta</b></h2>
+                      <h2>Liste des <b>Résultats</b></h2>
 					</div>
 					<div class="col-sm-6">
 						
@@ -250,8 +250,8 @@
                   <tr>
  
                     <th> ID </th>
-                    <th> field</th>
-                    <th> case </th>
+                    <th>champ</th>
+                    <th> cas</th>
 					  {% if user.role != 'user' %}
                     <th> Action </th>
 					{% endif %}
@@ -275,7 +275,7 @@
                   </tr>
         {% empty %}
         <tr>
-          <td colspan="3">No Equipes found.</td>
+          <td colspan="3">Aucune équipe trouvée.</td>
         </tr>
         {% endfor %}
                             
@@ -305,16 +305,16 @@
 			<div class="modal-content">
 				<form>
 					<div class="modal-header">						
-						<h4 class="modal-title">Delete </h4>
+						<h4 class="modal-title">Supprimer </h4>
 						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 					</div>
 					<div class="modal-body">					
-						<p>Are you sure you want to delete these Records?</p>
-						<p class="text-warning"><small>are you information Delete</small></p>
+						<p>Êtes-vous sûr de vouloir supprimer ces enregistrements ?</p>
+						<p class="text-warning"><small>êtes-vous en train de supprimer des informations</small></p>
 					</div>
 					<div class="modal-footer">
 						<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-						<a href=""{% url 'delete_condutionn'  i.pk %}""type="submit" class="btn btn-danger">Delete</a>
+						<a href=""{% url 'delete_condutionn'  i.pk %}""type="submit" class="btn btn-danger">Supprimer</a>
 					</div>
 				</form>
 			</div>

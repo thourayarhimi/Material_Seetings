@@ -14,7 +14,7 @@ from .models import rute, condition, resulta , File, FileMs  # Make sure to impo
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-# Create your tests here.
+# Create your tests here.     
 
     
     
@@ -134,7 +134,7 @@ class ResultaIdTest(TestCase):
         resulta_data = {
             'choix': 'TestField',
             'condition': 'TestCondition',
-        } 
+        }
 
         # Envoyez une requête POST avec les données fictives
         response = self.client.post(url, resulta_data)
@@ -206,3 +206,7 @@ class UploadTest(TestCase):
         # Clean up after the test if necessary
         saved_file.delete()
         saved_file_ms.delete()
+        
+        
+        
+        
